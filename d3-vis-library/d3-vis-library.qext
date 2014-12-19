@@ -1,0 +1,7 @@
+{
+	"name" : "d3 visualization library",
+	"description" : "A collection of d3 example visualizations, integrated into a Qlik Sense extension",
+	"type" : "visualization",
+	"version": 1.0,
+	"author": "Speros Kokenes"
+}

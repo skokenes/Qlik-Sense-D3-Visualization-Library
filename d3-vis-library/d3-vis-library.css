@@ -1,0 +1,37 @@
+.qv-object-d3-vis-library .d3vl_area {
+  font: 10px sans-serif;
+}
+
+.qv-object-d3-vis-library .d3vl_area .axis path,
+.qv-object-d3-vis-library .d3vl_area .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.qv-object-d3-vis-library .d3vl_area .area {
+  fill: steelblue;
+}
+
+.qv-object-d3-vis-library .d3vl_bar .bar {
+  fill: steelblue;
+}
+
+.qv-object-d3-vis-library .d3vl_bar .bar:hover {
+  fill: brown;
+}
+
+.qv-object-d3-vis-library .d3vl_bar .axis {
+  font: 10px sans-serif;
+}
+
+.qv-object-d3-vis-library .d3vl_bar .axis path,
+.qv-object-d3-vis-library .d3vl_bar .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.qv-object-d3-vis-library .d3vl_bar .x.axis path {
+  display: none;
+}
