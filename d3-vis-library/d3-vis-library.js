@@ -49,18 +49,28 @@ function($, cssContent) {
 			canTakeSnapshot : true
 		},
 		paint: function ($element,layout) {
-			//add your rendering code here
-			//$element.html( "D3 viz library" );
-			//console.log(layout);
+			var self = this;
+			extendLayout(layout,self);
+			var dim_count = layout.qHyperCube.qDimensionInfo.length;
+			var measure_count = layout.qHyperCube.qMeasureInfo.length;
 
-			// Determine URL based on chart selection
-			var src = charts.filter(function(d) {return d.id === layout.chart})[0].src;
-			var url = document.location.origin + "/extensions/d3-vis-library/library/" + src;
+			if (dim_count != charts.filter(function(d) {return d.id === layout.chart})[0].dims || measure_count > charts.filter(function(d) {return d.id === layout.chart})[0].measures) {
+				$element.html("This chart requires " + charts.filter(function(d) {return d.id === layout.chart})[0].dims + " dimensions and " + charts.filter(function(d) {return d.id === layout.chart})[0].measures + " measures.");
+			}
+			else {
 
-			// Load in the appropriate script and viz
-			jQuery.getScript(url,function() {
-				viz($element,layout,this);
-			})
+				$element.html("");
+				// Determine URL based on chart selection
+				var src = charts.filter(function(d) {return d.id === layout.chart})[0].src;
+				var url = document.location.origin + "/extensions/d3-vis-library/library/" + src;
+
+				// Load in the appropriate script and viz
+				jQuery.getScript(url,function() {
+					viz($element,layout,self);
+				});
+
+			}
+			
 		}
 	};
 
@@ -95,4 +105,48 @@ function getLabelWidth(axis,svg) {
 	svg.selectAll(".y.axis.temp").remove();
 
 	return label_width;
+}
+
+function setupContainer($element,layout,class_name) {
+	// Properties: height, width, id
+	var ext_height = $element.height(),
+		ext_width = $element.width(), 
+		id = "ext_" + layout.qInfo.qId;
+
+	// Initialize or clear out the container and its classes
+	if (!document.getElementById(id)) {
+		$element.append($("<div />").attr("id",id));
+	}
+
+	else {
+	
+		$("#" + id)
+			.empty()
+			.removeClass();
+
+	}
+
+	// Set the containers properties like width, height, and class
+	
+	$("#" + id)
+		.width(ext_width)
+		.height(ext_height)
+		.addClass(class_name);
+
+	return id;
+}
+
+function extendLayout(layout,self) {
+	var dim_count = layout.qHyperCube.qDimensionInfo.length;
+
+	layout.qHyperCube.qDataPages[0].qMatrix.forEach(function(d) {
+		for (var i = 0; i<dim_count; i++) {
+			d[i].qSelf = self;
+			d[i].qIndex = i;
+			d[i].qSelect = function() {
+				this.qSelf.backendApi.selectValues(this.qIndex,[this.qElemNumber],true);	
+			}
+					
+		};
+	});
 }

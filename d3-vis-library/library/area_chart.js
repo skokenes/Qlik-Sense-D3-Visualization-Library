@@ -1,28 +1,8 @@
 var viz = function($element,layout,_this) {
-	// Properties: height, width, id
-	var ext_height = $element.height(),
-		ext_width = $element.width(), 
-		id = "ext_" + layout.qInfo.qId;
 
-	// Initialize or clear out the container and its classes
-	if (!document.getElementById(id)) {
-		$element.append($("<div />").attr("id",id));
-	}
-
-	else {
-	
-		$("#" + id)
-			.empty()
-			.removeClass();
-
-	}
-
-	// Set the containers properties like width, height, and class
-	
-	$("#" + id)
-		.width(ext_width)
-		.height(ext_height)
-		.addClass("d3vl_area");
+	var id = setupContainer($element,layout,"d3vl_area"),
+		ext_width = $element.width(),
+		ext_height = $element.height();
 
 	var data = layout.qHyperCube.qDataPages[0].qMatrix;
 

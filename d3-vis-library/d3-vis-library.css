@@ -35,3 +35,46 @@
 .qv-object-d3-vis-library .d3vl_bar .x.axis path {
   display: none;
 }
+
+.qv-object-d3-vis-library .d3vl_stacked_bar {
+  font: 10px sans-serif;
+}
+
+.qv-object-d3-vis-library .d3vl_stacked_bar .axis path,
+.qv-object-d3-vis-library .d3vl_stacked_bar .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.qv-object-d3-vis-library .d3vl_stacked_bar .bar {
+  fill: steelblue;
+}
+
+.qv-object-d3-vis-library .d3vl_stacked_bar .x.axis path {
+  display: none;
+}
+
+.qv-object-d3-vis-library .d3vl_normalized_stacked_bar {
+  font: 10px sans-serif;
+}
+
+.qv-object-d3-vis-library .d3vl_normalized_stacked_bar .axis path,
+.qv-object-d3-vis-library .d3vl_normalized_stacked_bar .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.qv-object-d3-vis-library .d3vl_normalized_stacked_bar .bar {
+  fill: steelblue;
+}
+
+.qv-object-d3-vis-library .d3vl_normalized_stacked_bar .x.axis path {
+  display: none;
+}
+
+.qv-object-d3-vis-library .d3vl_normalized_stacked_bar .legend line {
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
