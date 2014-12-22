@@ -78,3 +78,22 @@
   stroke: #000;
   shape-rendering: crispEdges;
 }
+
+.qv-object-d3-vis-library .d3vl_grouped_bar {
+  font: 10px sans-serif;
+}
+
+.qv-object-d3-vis-library .d3vl_grouped_bar .axis path,
+.qv-object-d3-vis-library .d3vl_grouped_bar .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.qv-object-d3-vis-library .d3vl_grouped_bar .bar {
+  fill: steelblue;
+}
+
+.qv-object-d3-vis-library .d3vl_grouped_bar .x.axis path {
+  display: none;
+}

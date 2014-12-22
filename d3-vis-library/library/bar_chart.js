@@ -37,8 +37,8 @@ var viz = function($element, layout, _this) {
 	var plot = svg.append("g")
 	    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-	x.domain(data.map(function(d) { return getDim(d,1).qText; }));
-	y.domain([0, d3.max(data, function(d) { return getMeasure(d,1,layout).qNum; })]);
+	x.domain(data.map(function(d) { return d.dim(1).qText; }));
+	y.domain([0, d3.max(data, function(d) { return d.measure(1).qNum; })]);
 
 	plot.append("g")
 	      .attr("class", "x axis")
@@ -59,9 +59,9 @@ var viz = function($element, layout, _this) {
 	      .data(data)
 	    .enter().append("rect")
 	      .attr("class", "bar")
-	      .attr("x", function(d) { return x(getDim(d,1).qText); })
+	      .attr("x", function(d) { return x(d.dim(1).qText); })
 	      .attr("width", x.rangeBand())
-	      .attr("y", function(d) { return y(getMeasure(d,1,layout).qNum); })
-	      .attr("height", function(d) { return height - y(getMeasure(d,1,layout).qNum); });
+	      .attr("y", function(d) { return y(d.measure(1).qNum); })
+	      .attr("height", function(d) { return height - y(d.measure(1).qNum); });
 	
 };

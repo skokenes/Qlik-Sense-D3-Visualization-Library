@@ -27,16 +27,16 @@ var viz = function($element,layout,_this) {
 	    .orient("left");
 
 	var area = d3.svg.area()
-	    .x(function(d) { return x(getDim(d,1).qText); })
+	    .x(function(d) { return x(d.dim(1).qText); })
 	    .y0(height)
-	    .y1(function(d) { return y(getMeasure(d,1,layout).qNum); });
+	    .y1(function(d) { return y(d.measure(1).qNum); });
 
 	var svg = d3.select("#" + id).append("svg")
 	    .attr("width", width + margin.left + margin.right)
 	    .attr("height", height + margin.top + margin.bottom);
 
-	x.domain(data.map(function(d) { return getDim(d,1).qText; }));
- 	y.domain([0, d3.max(data, function(d) { return getMeasure(d,1,layout).qNum; })]);
+	x.domain(data.map(function(d) { return d.dim(1).qText; }));
+ 	y.domain([0, d3.max(data, function(d) { return d.measure(1).qNum; })]);
 
 	var label_width = getLabelWidth(yAxis,svg); 	
 

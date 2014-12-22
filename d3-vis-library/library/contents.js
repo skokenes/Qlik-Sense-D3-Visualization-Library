@@ -26,6 +26,13 @@ var charts = [
 		src:"normalized_stacked_bar_chart.js",
 		dims:2,
 		measures:1
+	},
+	{
+		name:"Grouped Bar Chart",
+		id:5,
+		src:"grouped_bar_chart.js",
+		dims:2,
+		measures:1
 	}
 ];
 

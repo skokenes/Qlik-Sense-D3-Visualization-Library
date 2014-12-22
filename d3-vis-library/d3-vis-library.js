@@ -78,14 +78,6 @@ function($, cssContent) {
 
 
 // Helper functions
-function getDim(d,n) {
-	return d[n-1];
-};
-
-function getMeasure(d,n,layout) {
-	var dim_count = layout.qHyperCube.qDimensionInfo.length;
-	return d[dim_count+n-1];
-}
 
 function getMeasureLabel(n,layout) {
 	return layout.qHyperCube.qMeasureInfo[n-1].qFallbackTitle;
@@ -140,6 +132,13 @@ function extendLayout(layout,self) {
 	var dim_count = layout.qHyperCube.qDimensionInfo.length;
 
 	layout.qHyperCube.qDataPages[0].qMatrix.forEach(function(d) {
+		d.dim = function(i) {
+			return d[i-1];
+		};
+		d.measure = function(i) {
+			return d[i+dim_count-1];
+		};
+
 		for (var i = 0; i<dim_count; i++) {
 			d[i].qSelf = self;
 			d[i].qIndex = i;

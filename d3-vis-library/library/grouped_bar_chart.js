@@ -1,5 +1,5 @@
 var viz = function($element, layout, _this) {
-	var id = setupContainer($element,layout,"d3vl_stacked_bar"),
+	var id = setupContainer($element,layout,"d3vl_grouped_bar"),
 		ext_width = $element.width(),
 		ext_height = $element.height();
 
@@ -11,6 +11,8 @@ var viz = function($element, layout, _this) {
 	    height = ext_height - margin.top - margin.bottom;
 
 	var x = d3.scale.ordinal();
+
+	var x1 = d3.scale.ordinal();
 
 	var y = d3.scale.linear()
 	    .rangeRound([height, 0]);
@@ -33,21 +35,9 @@ var viz = function($element, layout, _this) {
 	var nested_data = d3.nest()
 						.key(function(d) {return d.dim(1).qText})
 						.entries(data);
-	
-
-	nested_data.forEach(function(d) {
-		var y0=0;
-		d.values.forEach(function(e) {
-			var currentMeasure = e.measure(1);
-			currentMeasure.y0 = y0;
-			currentMeasure.y1 = y0 += currentMeasure.qNum;
-		});
-		d.total = d.values[d.values.length-1].measure(1).y1;
-	});
-
 
 	x.domain(nested_data.map(function(d) {return d.key;}));
-	y.domain([0,d3.max(nested_data,function(d) {return d.total;})]);
+	y.domain([0,d3.max(data,function(d) {return d.measure(1).qNum;})]);
 
 	var svg = d3.select("#" + id).append("svg")
 	    .attr("width", width + margin.left + margin.right)
@@ -67,6 +57,7 @@ var viz = function($element, layout, _this) {
 		.text(function(d) { return d; });
 
 	var legend_width = d3.max(svg.selectAll(".legend_temp")[0], function(d) {return d.clientWidth});
+
 	// Remove the temp axis
 	svg.selectAll(".legend_temp").remove();
 
@@ -75,6 +66,8 @@ var viz = function($element, layout, _this) {
 	margin.right = margin.right + legend_width;
 	width = ext_width - margin.left - margin.right;
 	x.rangeRoundBands([0, width], .1);
+	x1.domain(data.map(function(d) {return d.dim(2).qText}))
+		.rangeRoundBands([0,x.rangeBand()]);
 	  
 	var plot = svg.append("g")
 	    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -105,9 +98,10 @@ var viz = function($element, layout, _this) {
 	dim1.selectAll("rect")
 		.data(function(d) { return d.values; })
 		.enter().append("rect")
-		.attr("width", x.rangeBand())
-		.attr("y", function(d) { return y(d.measure(1).y1); })
-		.attr("height", function(d) { return y(d.measure(1).y0) - y(d.measure(1).y1); })
+		.attr("width", x1.rangeBand())
+		.attr("x",function(d) {return x1(d.dim(2).qText);})
+		.attr("y", function(d) { return y(d.measure(1).qNum); })
+		.attr("height", function(d) { return height - y(d.measure(1).qNum); })
 		.style("fill", function(d) { return color(d.dim(2).qText); })
 		.on("click",function(d) {
 			d.dim(2).qSelect();

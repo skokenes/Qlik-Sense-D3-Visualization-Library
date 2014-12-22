@@ -28,23 +28,23 @@ var viz = function($element, layout, _this) {
 	    .orient("left")
 	    .tickFormat(d3.format(".0%"));
 
-	color.domain(data.map(function(d) {return getDim(d,2).qText}));
+	color.domain(data.map(function(d) {return d.dim(2).qText;}));
 
 	var nested_data = d3.nest()
-						.key(function(d) {return getDim(d,1).qText})
+						.key(function(d) {return d.dim(1).qText;})
 						.entries(data);
 	
 
 	nested_data.forEach(function(d) {
 		var y0=0;
 		d.values.forEach(function(e) {
-			var currentMeasure = getMeasure(e,1,layout);
+			var currentMeasure = e.measure(1);
 			currentMeasure.y0 = y0;
 			currentMeasure.y1 = y0 += currentMeasure.qNum;
 		});
-		d.total = getMeasure(d.values[d.values.length-1],1,layout).y1;
+		d.total = d.values[d.values.length-1].measure(1).y1;
 		d.values.forEach(function(e) {
-			var currentMeasure = getMeasure(e,1,layout);
+			var currentMeasure = e.measure(1);
 			currentMeasure.y0 = currentMeasure.y0/d.total;
 			currentMeasure.y1 = currentMeasure.y1/d.total;
 		});
@@ -103,18 +103,18 @@ var viz = function($element, layout, _this) {
 		.data(function(d) { return d.values; })
 		.enter().append("rect")
 		.attr("width", x.rangeBand())
-		.attr("y", function(d) { return y(getMeasure(d,1,layout).y1); })
-		.attr("height", function(d) { return y(getMeasure(d,1,layout).y0) - y(getMeasure(d,1,layout).y1); })
-		.style("fill", function(d) { return color(getDim(d,2).qText); })
+		.attr("y", function(d) { return y(d.measure(1).y1); })
+		.attr("height", function(d) { return y(d.measure(1).y0) - y(d.measure(1).y1); })
+		.style("fill", function(d) { return color(d.dim(2).qText); })
 		.on("click",function(d) {
-			getDim(d,2).qSelect();
+			d.dim(2).qSelect();
 		});
 
 	var legend = plot.select(".dim1:last-child").selectAll(".legend")
 		.data(function(d) { return d.values; })
 		.enter().append("g")
 		.attr("class", "legend")
-		.attr("transform", function(d) { return "translate(" + (x.rangeBand()-7) + "," + y((getMeasure(d,1,layout).y0 + getMeasure(d,1,layout).y1) / 2) + ")"; });
+		.attr("transform", function(d) { return "translate(" + (x.rangeBand()-7) + "," + y((d.measure(1).y0 + d.measure(1).y1) / 2) + ")"; });
 
 	legend.append("line")
 		.attr("x2", 10);
@@ -122,7 +122,7 @@ var viz = function($element, layout, _this) {
 	legend.append("text")
 		.attr("x", 13)
 		.attr("dy", ".35em")
-		.text(function(d) { return getDim(d,2).qText; });
+		.text(function(d) { return d.dim(2).qText; });
 	/**/
 }
 
