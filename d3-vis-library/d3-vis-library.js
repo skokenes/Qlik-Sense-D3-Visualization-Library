@@ -3,6 +3,7 @@
 function($, cssContent) {
 	'use strict';
 	$("<style>").html(cssContent).appendTo("head");
+	var lastUsedChart = -1;
 	return {
 		initialProperties : {
 			version: 1.0,
@@ -49,25 +50,34 @@ function($, cssContent) {
 			canTakeSnapshot : true
 		},
 		paint: function ($element,layout) {
+			
 			var self = this;
 			extendLayout(layout,self);
 			var dim_count = layout.qHyperCube.qDimensionInfo.length;
 			var measure_count = layout.qHyperCube.qMeasureInfo.length;
 
-			if (dim_count != charts.filter(function(d) {return d.id === layout.chart})[0].dims || measure_count > charts.filter(function(d) {return d.id === layout.chart})[0].measures) {
-				$element.html("This chart requires " + charts.filter(function(d) {return d.id === layout.chart})[0].dims + " dimensions and " + charts.filter(function(d) {return d.id === layout.chart})[0].measures + " measures.");
+			if ((dim_count < charts.filter(function(d) {return d.id === layout.chart})[0].min_dims || dim_count > charts.filter(function(d) {return d.id === layout.chart})[0].max_dims) || measure_count > charts.filter(function(d) {return d.id === layout.chart})[0].measures) {
+				$element.html("This chart requires " + charts.filter(function(d) {return d.id === layout.chart})[0].min_dims + " dimensions and " + charts.filter(function(d) {return d.id === layout.chart})[0].measures + " measures.");
 			}
 			else {
 
-				$element.html("");
-				// Determine URL based on chart selection
-				var src = charts.filter(function(d) {return d.id === layout.chart})[0].src;
-				var url = document.location.origin + "/extensions/d3-vis-library/library/" + src;
+				if (layout.chart != lastUsedChart) {
+					$element.html("");
+					// Determine URL based on chart selection
+					var src = charts.filter(function(d) {return d.id === layout.chart})[0].src;
+					var url = document.location.origin + "/extensions/d3-vis-library/library/" + src;
 
-				// Load in the appropriate script and viz
-				jQuery.getScript(url,function() {
+					// Load in the appropriate script and viz
+					jQuery.getScript(url,function() {
+						viz($element,layout,self);
+						lastUsedChart = layout.chart;
+					});
+
+					
+				}
+				else {
 					viz($element,layout,self);
-				});
+				}
 
 			}
 			

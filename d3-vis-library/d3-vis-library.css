@@ -97,3 +97,75 @@
 .qv-object-d3-vis-library .d3vl_grouped_bar .x.axis path {
   display: none;
 }
+
+.qv-object-d3-vis-library .d3vl_treemap  {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: auto;
+  position: relative;
+}
+
+.qv-object-d3-vis-library .d3vl_treemap .node {
+  border: solid 1px white;
+  font: 10px sans-serif;
+  line-height: 12px;
+  overflow: hidden;
+  position: absolute;
+  text-indent: 2px;
+}
+
+.qv-object-d3-vis-library .d3vl_cluster_dendogram .node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.qv-object-d3-vis-library .d3vl_cluster_dendogram .node {
+  font: 10px sans-serif;
+}
+
+.qv-object-d3-vis-library .d3vl_cluster_dendogram .link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+
+.qv-object-d3-vis-library .d3vl_radial_tree .node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.qv-object-d3-vis-library .d3vl_radial_tree .node {
+  font: 10px sans-serif;
+}
+
+.qv-object-d3-vis-library .d3vl_radial_tree .link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+
+.qv-object-d3-vis-library .d3vl_zoomable_circle_packing .node {
+  cursor: pointer;
+}
+
+.qv-object-d3-vis-library .d3vl_zoomable_circle_packing .node:hover {
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.qv-object-d3-vis-library .d3vl_zoomable_circle_packing .node--leaf {
+  fill: white;
+}
+
+.qv-object-d3-vis-library .d3vl_zoomable_circle_packing .label {
+  font: 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-anchor: middle;
+  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+}
+
+.qv-object-d3-vis-library .d3vl_zoomable_circle_packing .label,
+.qv-object-d3-vis-library .d3vl_zoomable_circle_packing .node--root,
+.qv-object-d3-vis-library .d3vl_zoomable_circle_packing .node--leaf {
+  pointer-events: none;
+}
