@@ -155,7 +155,7 @@
 }
 
 .qv-object-d3-vis-library .d3vl_zoomable_circle_packing .node--leaf {
-  fill: white;
+  //fill: white;
 }
 
 .qv-object-d3-vis-library .d3vl_zoomable_circle_packing .label {
@@ -168,4 +168,80 @@
 .qv-object-d3-vis-library .d3vl_zoomable_circle_packing .node--root,
 .qv-object-d3-vis-library .d3vl_zoomable_circle_packing .node--leaf {
   pointer-events: none;
+}
+
+.qv-object-d3-vis-library .d3vl_zoomable_circle_packing circle {
+  fill: #ccc;
+  stroke: #999;
+  pointer-events: all;
+}
+
+.qv-object-d3-vis-library .d3vl_zoomable_circle_packing circle.node--root,
+.qv-object-d3-vis-library .d3vl_zoomable_circle_packing circle.node
+ {
+  fill: #1f77b4;
+  fill-opacity: .1;
+  stroke: steelblue;
+}
+
+.qv-object-d3-vis-library .d3vl_zoomable_circle_packing circle.node--root:hover,
+.qv-object-d3-vis-library .d3vl_zoomable_circle_packing circle.node:hover {
+  stroke: black;
+  stroke-width: 1px;
+}
+
+.qv-object-d3-vis-library .d3vl_zoomable_circle_packing circle.node--leaf {
+  pointer-events: none;
+}
+
+.qv-object-d3-vis-library .d3vl_collapsible_force circle.node {
+  cursor: pointer;
+  stroke: #000;
+  stroke-width: .5px;
+}
+
+.qv-object-d3-vis-library .d3vl_collapsible_force line.link {
+  fill: none;
+  stroke: #9ecae1;
+  stroke-width: 1.5px;
+}
+
+.qv-object-d3-vis-library .d3vl_zoom_partition .chart {
+  display: block;
+  margin: auto;
+  font-size: 11px;
+}
+
+.qv-object-d3-vis-library .d3vl_zoom_partition rect {
+  stroke: #eee;
+  fill: #aaa;
+  fill-opacity: .8;
+}
+
+.qv-object-d3-vis-library .d3vl_zoom_partition rect.parent {
+  cursor: pointer;
+  fill: steelblue;
+}
+
+.qv-object-d3-vis-library .d3vl_zoom_partition text {
+  pointer-events: none;
+}
+
+.qv-object-d3-vis-library .d3vl_collapse_indented_tree .node rect {
+  cursor: pointer;
+  fill: #fff;
+  fill-opacity: .5;
+  stroke: #3182bd;
+  stroke-width: 1.5px;
+}
+
+.qv-object-d3-vis-library .d3vl_collapse_indented_tree .node text {
+  font: 10px sans-serif;
+  pointer-events: none;
+}
+
+.qv-object-d3-vis-library .d3vl_collapse_indented_tree path.link {
+  fill: none;
+  stroke: #9ecae1;
+  stroke-width: 1.5px;
 }

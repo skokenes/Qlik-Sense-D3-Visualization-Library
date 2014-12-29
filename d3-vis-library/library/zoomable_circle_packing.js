@@ -41,8 +41,8 @@ var viz = function($element, layout, _this) {
 	var circle = svg.selectAll("circle")
 		.data(nodes)
 		.enter().append("circle")
-		.attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
-		.style("fill", function(d) { return d.children ? color(d.depth) : null; })
+		.attr("class", function(d) { return d.parent ? d.children ? "node" : "node--leaf" : "node node--root"; })
+		//.style("fill", function(d) { return d.children ? color(d.depth) : null; })
 		.on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
 
 	var text = svg.selectAll("text")
@@ -56,7 +56,7 @@ var viz = function($element, layout, _this) {
 	var node = svg.selectAll("circle,text");
 
 	d3.select("#" + id)
-		.style("background", color(-1))
+		//.style("background", color(-1))
 		.on("click", function() { zoom(nest); });
 
 	zoomTo([nest.x, nest.y, nest.r * 2 + margin]);

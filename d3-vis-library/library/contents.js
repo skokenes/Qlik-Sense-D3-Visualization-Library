@@ -70,6 +70,30 @@ var charts = [
 		min_dims:2,
 		max_dims:1000,
 		measures:1
+	},
+	{
+		name:"Collapsible Force Diagram",
+		id:10,
+		src:"collapsible_force_diagram.js",
+		min_dims:2,
+		max_dims:1000,
+		measures:1
+	},
+	{
+		name:"Zoomable Partition Layout",
+		id:11,
+		src:"zoomable_partition_layout.js",
+		min_dims:2,
+		max_dims:1000,
+		measures:1
+	},
+	{
+		name:"Collapsible Indented Tree",
+		id:12,
+		src:"collapsible_indented_tree.js",
+		min_dims:2,
+		max_dims:1000,
+		measures:1
 	}
 ];
 
