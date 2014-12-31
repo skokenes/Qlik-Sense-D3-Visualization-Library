@@ -245,3 +245,230 @@
   stroke: #9ecae1;
   stroke-width: 1.5px;
 }
+
+.qv-object-d3-vis-library .d3vl_line {
+  font: 10px sans-serif;
+}
+
+.qv-object-d3-vis-library .d3vl_line .axis path,
+.qv-object-d3-vis-library .d3vl_line .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.qv-object-d3-vis-library .d3vl_line .x.axis path {
+  display: none;
+}
+
+.qv-object-d3-vis-library .d3vl_line .line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.qv-object-d3-vis-library .d3vl_multi_line {
+  font: 10px sans-serif;
+}
+
+.qv-object-d3-vis-library .d3vl_multi_line .axis path,
+.qv-object-d3-vis-library .d3vl_multi_line .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.qv-object-d3-vis-library .d3vl_multi_line .x.axis path {
+  display: none;
+}
+
+.qv-object-d3-vis-library .d3vl_multi_line .line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.qv-object-d3-vis-library .d3vl_stacked_area {
+  font: 10px sans-serif;
+}
+
+.qv-object-d3-vis-library .d3vl_stacked_area .axis path,
+.qv-object-d3-vis-library .d3vl_stacked_area .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.qv-object-d3-vis-library .d3vl_stacked_area .browser text {
+  text-anchor: end;
+}
+
+.qv-object-d3-vis-library .d3vl_donut {
+  font: 10px sans-serif;
+}
+
+.qv-object-d3-vis-library .d3vl_donut .arc path {
+  stroke: #fff;
+}
+
+.qv-object-d3-vis-library .d3vl_pie {
+  font: 10px sans-serif;
+}
+
+.qv-object-d3-vis-library .d3vl_pie .arc path {
+  stroke: #fff;
+}
+
+.qv-object-d3-vis-library .d3vl_donut_multiples {
+  font: 10px sans-serif;
+}
+
+.qv-object-d3-vis-library .d3vl_donut_multiples svg {
+  padding: 10px 0 0 10px;
+}
+
+.qv-object-d3-vis-library .d3vl_donut_multiples .arc {
+  stroke: #fff;
+}
+
+.qv-object-d3-vis-library .d3vl_two_dim_scatter {
+  font: 10px sans-serif;
+}
+
+.qv-object-d3-vis-library .d3vl_two_dim_scatter .axis path,
+.qv-object-d3-vis-library .d3vl_two_dim_scatter .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.qv-object-d3-vis-library .d3vl_two_dim_scatter .dot {
+  stroke: #000;
+}
+
+.qv-object-d3-vis-library .d3vl_box_plot {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.qv-object-d3-vis-library .d3vl_box_plot .box {
+  font: 10px sans-serif;
+}
+
+.qv-object-d3-vis-library .d3vl_box_plot .box line,
+.qv-object-d3-vis-library .d3vl_box_plot .box rect,
+.qv-object-d3-vis-library .d3vl_box_plot .box circle {
+  fill: #fff;
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.qv-object-d3-vis-library .d3vl_box_plot .box .center {
+  stroke-dasharray: 3,3;
+}
+
+.qv-object-d3-vis-library .d3vl_box_plot .box .outlier {
+  fill: none;
+  stroke: #ccc;
+}
+
+.qv-object-d3-vis-library .d3vl_box_plot .title {
+  font-size: 12px;
+}
+
+.qv-object-d3-vis-library .d3vl_difference {
+  font: 10px sans-serif;
+}
+
+.qv-object-d3-vis-library .d3vl_difference .axis path,
+.qv-object-d3-vis-library .d3vl_difference .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.qv-object-d3-vis-library .d3vl_difference .x.axis path {
+  display: none;
+}
+
+.qv-object-d3-vis-library .d3vl_difference .area.above {
+  fill: rgb(252,141,89);
+}
+
+.qv-object-d3-vis-library .d3vl_difference .area.below {
+  fill: rgb(145,207,96);
+}
+
+.qv-object-d3-vis-library .d3vl_difference .line {
+  fill: none;
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.qv-object-d3-vis-library .d3vl_aster {
+  font: 10px sans-serif;
+}
+
+.qv-object-d3-vis-library .d3vl_aster .axis path,
+.qv-object-d3-vis-library .d3vl_aster .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.qv-object-d3-vis-library .d3vl_aster .bar {
+  fill: orange;
+}
+
+.qv-object-d3-vis-library .d3vl_aster .solidArc:hover {
+  fill: orangered ;
+}
+
+.qv-object-d3-vis-library .d3vl_aster .solidArc {
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.qv-object-d3-vis-library .d3vl_aster .x.axis path {
+  display: none;
+}
+
+.qv-object-d3-vis-library .d3vl_aster .aster-score { 
+  line-height: 1;
+  font-weight: bold;
+  font-size: 500%;
+}
+
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+
+.d3-tip td {
+  padding: 5px 10px;
+}

@@ -94,6 +94,110 @@ var charts = [
 		min_dims:2,
 		max_dims:1000,
 		measures:1
+	},
+	{
+		name:"Line Chart",
+		id:13,
+		src:"line_chart.js",
+		min_dims:1,
+		max_dims:1,
+		measures:1
+	},
+	{
+		name:"Multi-Series Line Chart",
+		id:14,
+		src:"multi_series_line_chart.js",
+		min_dims:2,
+		max_dims:2,
+		measures:1
+	},
+	{
+		name:"Bivariate Area Chart",
+		id:15,
+		src:"bivariate_area_chart.js",
+		min_dims:1,
+		max_dims:1,
+		measures:2
+	},
+	{
+		name:"Stacked Area Chart",
+		id:16,
+		src:"stacked_area_chart.js",
+		min_dims:2,
+		max_dims:2,
+		measures:1
+	},
+	{
+		name:"Donut Chart",
+		id:17,
+		src:"donut_chart.js",
+		min_dims:1,
+		max_dims:1,
+		measures:1
+	},
+	{
+		name:"Pie Chart",
+		id:18,
+		src:"pie_chart.js",
+		min_dims:1,
+		max_dims:1,
+		measures:1
+	},
+	{
+		name:"Donut Multiples",
+		id:19,
+		src:"donut_multiples_chart.js",
+		min_dims:2,
+		max_dims:2,
+		measures:1
+	},
+	{
+		name:"Two Dimensional Scatter",
+		id:20,
+		src:"two_dimensional_scatter.js",
+		min_dims:2,
+		max_dims:2,
+		measures:2
+	},
+	{
+		name:"Box Plot",
+		id:21,
+		src:"box_plot.js",
+		min_dims:2,
+		max_dims:2,
+		measures:1
+	},
+	{
+		name:"Bubble Chart",
+		id:22,
+		src:"bubble_chart.js",
+		min_dims:2,
+		max_dims:1000,
+		measures:1
+	},
+	{
+		name:"Streamgraph",
+		id:23,
+		src:"stream_graph.js",
+		min_dims:2,
+		max_dims:2,
+		measures:1
+	},
+	{
+		name:"Difference Chart",
+		id:24,
+		src:"difference_chart.js",
+		min_dims:1,
+		max_dims:1,
+		measures:2
+	},
+	{
+		name:"Aster Plot",
+		id:25,
+		src:"aster_plot.js",
+		min_dims:1,
+		max_dims:1,
+		measures:2
 	}
 ];
 
