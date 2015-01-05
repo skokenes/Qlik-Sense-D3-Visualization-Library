@@ -39,13 +39,19 @@ var viz = function($element,layout,_this) {
 
 	  g.append("path")
 	      .attr("d", arc)
-	      .style("fill", function(d) { return color(d.data.dim(1).qText); });
+	      .style("fill", function(d) { return color(d.data.dim(1).qText); })
+	      .on("click", function(d) {
+	      	d.data.dim(1).qSelect();
+	      });
 
 	  g.append("text")
 	      .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
 	      .attr("dy", ".35em")
 	      .style("text-anchor", "middle")
-	      .text(function(d) { return d.data.dim(1).qText; });
+	      .text(function(d) { return d.data.dim(1).qText; })
+	      .on("click",function(d) {
+	      	d.data.dim(1).qSelect();
+	      });
 
 
 }

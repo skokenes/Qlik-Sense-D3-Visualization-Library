@@ -472,3 +472,137 @@
 .d3-tip td {
   padding: 5px 10px;
 }
+
+.qv-object-d3-vis-library .d3vl_slope {
+  font: 12px sans-serif;
+}
+
+.qv-object-d3-vis-library .d3vl_slope .slope {
+  fill:none;
+  stroke: #000;
+  stroke-width: 1px;
+  stroke-opacity:.5;
+}
+
+.qv-object-d3-vis-library .d3vl_slope .label-left {
+  text-anchor:end;
+}
+
+.qv-object-d3-vis-library .d3vl_slope .label-right {
+  text-anchor:start;
+}
+
+.qv-object-d3-vis-library .d3vl_slope .title {
+  font-size:14px;
+}
+
+.qv-object-d3-vis-library .d3vl_heatmap .square {
+  stroke: #E6E6E6;
+  stroke-width:2px;  
+}
+
+.qv-object-d3-vis-library .d3vl_heatmap .axis path {
+  display: none;
+}
+
+.qv-object-d3-vis-library .d3vl_radar .radar-chart .level {
+  stroke: grey;
+  stroke-width: 0.5;
+}
+
+.qv-object-d3-vis-library .d3vl_radar .axis line {
+  stroke: grey;
+  stroke-width: 1;
+}
+.qv-object-d3-vis-library .d3vl_radar .axis .legend {
+  font-family: sans-serif;
+  font-size: 10px;
+}
+.qv-object-d3-vis-library .d3vl_radar .axis .legend.top {
+  dy:1em;
+}
+.qv-object-d3-vis-library .d3vl_radar .axis .legend.left {
+  text-anchor: start;
+}
+.qv-object-d3-vis-library .d3vl_radar .axis .legend.middle {
+  text-anchor: middle;
+}
+.qv-object-d3-vis-library .d3vl_radar .axis .legend.right {
+  text-anchor: end;
+}
+
+.qv-object-d3-vis-library .d3vl_radar .tooltip {
+  font-family: sans-serif;
+  font-size: 13px;
+  transition: opacity 200ms;
+  opacity: 0;
+}
+.qv-object-d3-vis-library .d3vl_radar .tooltip.visible {
+  opacity: 1;
+}
+
+/* area transition when hovering */
+.qv-object-d3-vis-library .d3vl_radar .area {
+  stroke-width: 2;
+  fill-opacity: 0.3;
+}
+.qv-object-d3-vis-library .d3vl_radar .radar-chart.focus .area {
+  fill-opacity: 0.1;
+}
+.qv-object-d3-vis-library .d3vl_radar .radar-chart.focus .area.focused {
+  fill-opacity: 0.7;
+}
+
+.qv-object-d3-vis-library .d3vl_radar .radar-chart .circle {
+  fill-opacity: 0.9;
+}
+
+/* transitions */
+.qv-object-d3-vis-library .d3vl_radar .radar-chart .area, .radar-chart .circle {
+  transition: opacity 500ms, fill-opacity 400ms;
+  opacity: 1;
+}
+.qv-object-d3-vis-library .d3vl_radar .radar-chart .d3-enter, .radar-chart .d3-exit {
+  opacity: 0;
+}
+
+
+.qv-object-d3-vis-library .d3vl_zoom_treemap .chart {
+  display: block;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.qv-object-d3-vis-library .d3vl_zoom_treemap text {
+  font-size: 11px;
+}
+
+.qv-object-d3-vis-library .d3vl_zoom_treemap rect {
+  fill: none;
+}
+
+.qv-object-d3-vis-library .d3vl_zoom_sunburst {
+  overflow: auto;
+}
+.qv-object-d3-vis-library .d3vl_zoom_sunburst td, th {
+  border-top: 0px solid #fff;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  cursor: default;
+  font-size: 12px;
+}
+.qv-object-d3-vis-library .d3vl_zoom_sunburst td.numeric {
+  text-align: right;
+}
+.qv-object-d3-vis-library .d3vl_zoom_sunburst button {
+  width: 100%;
+}
+
+.qv-object-d3-vis-library .d3vl_zoom_sunburst path {
+  stroke: #fff;
+  fill-rule: evenodd;
+}

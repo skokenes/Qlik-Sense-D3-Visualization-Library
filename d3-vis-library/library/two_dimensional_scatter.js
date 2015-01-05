@@ -74,7 +74,12 @@ var viz = function($element, layout, _this) {
 	      .attr("r", 3.5)
 	      .attr("cx", function(d) { return x(d.measure(1).qNum); })
 	      .attr("cy", function(d) { return y(d.measure(2).qNum); })
-	      .style("fill", function(d) { return color(d.dim(2).qText); });
+	      .style("fill", function(d) { return color(d.dim(2).qText); })
+	      .on("click", function(d) {
+	      	d.dim(1).qSelect();
+	      })
+	      .append("title")
+	      .text(function(d) {return getDimLabel(1,layout) + ": " + d.dim(1).qText});
 
 	  var legend = plot.selectAll(".legend")
 	      .data(color.domain())

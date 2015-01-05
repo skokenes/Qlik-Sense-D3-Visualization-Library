@@ -12,7 +12,7 @@ var viz = function($element, layout, _this) {
 
 	var dim_count = layout.qHyperCube.qDimensionInfo.length;
 
-	var json = {name: "root", children: senseD3.createFamily(data,dim_count)};
+	var json = {name: layout.title, children: senseD3.createFamily(data,dim_count)};
 
 	var w = ext_width,
 	    h = ext_height,
@@ -81,7 +81,11 @@ var viz = function($element, layout, _this) {
 	      .attr("r", function(d) { return d.children ? 4.5 : radius(d.size); })
 	      .style("fill", color)
 	      .on("click", click)
-	      .call(force.drag);
+	      .call(force.drag)
+	      .append("title")
+	      .text(function(d) {
+	      	return "Name: " + d.name + " \nValue: " + d.size;
+	      });
 
 	  // Exit any old nodes.
 	  node.exit().remove();

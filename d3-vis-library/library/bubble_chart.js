@@ -36,7 +36,10 @@ var viz = function($element, layout, _this) {
 
 	  node.append("circle")
 	      .attr("r", function(d) { return d.r; })
-	      .style("fill", function(d) { return color(d.packageName); });
+	      .style("fill", function(d) { return color(d.packageName); })
+	      .on("click", function(d) {
+	      	console.log(d);
+	      });
 
 	  node.append("text")
 	      .attr("dy", ".3em")

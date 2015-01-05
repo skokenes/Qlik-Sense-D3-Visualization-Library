@@ -66,12 +66,12 @@ function($, cssContent) {
 					// Determine URL based on chart selection
 					var src = charts.filter(function(d) {return d.id === layout.chart})[0].src;
 					var url = document.location.origin + "/extensions/d3-vis-library/library/" + src;
-					// Load in the appropriate script and viz
+					// Load in the appropriate script and viz					
 					jQuery.getScript(url,function() {
 						viz($element,layout,self);
 						lastUsedChart = layout.chart;
 					});
-
+				
 					
 				}
 				else {
@@ -90,6 +90,10 @@ function($, cssContent) {
 
 function getMeasureLabel(n,layout) {
 	return layout.qHyperCube.qMeasureInfo[n-1].qFallbackTitle;
+}
+
+function getDimLabel(n,layout) {
+	return layout.qHyperCube.qDimensionInfo[n-1].qFallbackTitle;
 }
 
 function getLabelWidth(axis,svg) {

@@ -67,11 +67,17 @@ var viz = function($element,layout,_this) {
 		.enter().append("path")
 		.attr("class", "arc")
 		.attr("d", arc)
-		.style("fill", function(d) { return color(d.data.dim(1).qText); });
+		.style("fill", function(d) { return color(d.data.dim(1).qText); })
+		.on("click", function(d) {
+	      	d.data.dim(1).qSelect();
+	     });
 
 	svg.append("text")
 		.attr("dy", ".35em")
 		.style("text-anchor", "middle")
-		.text(function(d) { return d.key; });
+		.text(function(d) { return d.key; })
+		.on("click", function(d) {
+	      	d.values[0].dim(2).qSelect();
+	    });
 
 }

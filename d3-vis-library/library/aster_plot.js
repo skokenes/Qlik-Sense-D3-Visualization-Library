@@ -63,7 +63,10 @@ var viz = function($element,layout,_this) {
 		      .attr("stroke", "gray")
 		      .attr("d", arc)
 		      .on('mouseover', tip.show)
-		      .on('mouseout', tip.hide);
+		      .on('mouseout', tip.hide)
+		      .on("click", function(d) {
+		      	d.data.dim(1).qSelect();
+		      });
 
 		  var outerPath = svg.selectAll(".outlineArc")
 		      .data(pie(data))

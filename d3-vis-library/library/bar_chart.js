@@ -62,6 +62,9 @@ var viz = function($element, layout, _this) {
 	      .attr("x", function(d) { return x(d.dim(1).qText); })
 	      .attr("width", x.rangeBand())
 	      .attr("y", function(d) { return y(d.measure(1).qNum); })
-	      .attr("height", function(d) { return height - y(d.measure(1).qNum); });
+	      .attr("height", function(d) { return height - y(d.measure(1).qNum); })
+	      .on("click",function(d) {
+	      	return d.dim(1).qSelect();
+	      });
 	
 };

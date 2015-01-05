@@ -73,14 +73,20 @@ var viz = function($element,layout,_this) {
 	browser.append("path")
 		.attr("class", "area")
 		.attr("d", function(d) { return area(d.values); })
-		.style("fill", function(d) { return color(d.key); });
+		.style("fill", function(d) { return color(d.key); })
+		.on("click", function(d) {
+			d.values[0].dim(2).qSelect();
+		});
 
 	browser.append("text")
 		.datum(function(d) { return {name: d.key, value: d.values[d.values.length - 1]}; })
 		.attr("transform", function(d) { return "translate(" + x(d.value.dim(1).qText) + "," + y(d.value.y0 + d.value.y / 2) + ")"; })
 		.attr("x", -6)
 		.attr("dy", ".35em")
-		.text(function(d) { return d.name; });
+		.text(function(d) { return d.name; })
+		.on("click",function(d) {
+			d.value.dim(2).qSelect();
+		});
 
 	plot.append("g")
 		.attr("class", "x axis")

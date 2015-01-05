@@ -41,10 +41,27 @@ var viz = function($element,layout,_this) {
 	    .attr("width", width)
 	    .attr("height", height);
 
-	svg.selectAll("path")
-	    .data(stacked)
-	  .enter().append("path")
+	var browser = svg.selectAll(".browser")
+		.data(stacked)
+		.enter().append("g")
+		.attr("class", "browser");
+
+	browser.append("path")
 	    .attr("d", function(d) {return area(d.values);})
-	    .style("fill", function() { return color(Math.random()); });
+	    .style("fill", function() { return color(Math.random()); })
+	    .on("click",function(d) {
+	    	d.values[0].dim(2).qSelect();
+	    });
+
+	browser.append("text")
+		.datum(function(d) { return {name: d.key, value: d.values[d.values.length - 1]}; })
+		.attr("transform", function(d) { return "translate(" + x(d.value.dim(1).qText) + "," + y(d.value.y0 + d.value.y / 2) + ")"; })
+		.attr("x", -20)
+		.attr("dy", ".35em")
+		.attr("fill","white")
+		.text(function(d) { return d.name; })
+		.on("click",function(d) {
+			d.value.dim(2).qSelect();
+		});
 
 }

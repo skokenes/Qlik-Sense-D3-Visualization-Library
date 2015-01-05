@@ -43,7 +43,15 @@ var viz = function($element, layout, _this) {
       .attr("class", "node")
       .call(position)
       .style("background", function(d) { return d.values ? color(d.key) : null; })
-      .text(function(d) { return d.values ? null : d.dim(dim_count).qText; });
+      .text(function(d) { return d.values ? null : d.dim(dim_count).qText; })
+      .on("click", function(d) {
+      	if(d.values) {
+
+      	}
+      	else {
+      		d.dim(dim_count).qSelect();
+      	}
+      });
 
     function position() {
 	  this.style("left", function(d) { return d.x + "px"; })

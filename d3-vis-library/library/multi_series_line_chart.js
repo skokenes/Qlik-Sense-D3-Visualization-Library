@@ -90,13 +90,19 @@ var viz = function($element,layout,_this) {
 	  series.append("path")
 	      .attr("class", "line")
 	      .attr("d", function(d) { return line(d.values); })
-	      .style("stroke", function(d) { return color(d.key); });
+	      .style("stroke", function(d) { return color(d.key); })
+	      .on("click", function(d) {
+	      	d.values[0].dim(2).qSelect();
+	      });
 
 	  series.append("text")
 	      .datum(function(d) { return {name: d.key, value: d.values[d.values.length - 1]}; })
 	      .attr("transform", function(d) { return "translate(" + x(d.value.dim(1).qText) + "," + y(d.value.measure(1).qNum) + ")"; })
 	      .attr("x", 3)
 	      .attr("dy", ".35em")
-	      .text(function(d) { return d.name; });
+	      .text(function(d) { return d.name; })
+	      .on("click", function(d) {
+	      	d.value.dim(2).qSelect();
+	      });
 
 }

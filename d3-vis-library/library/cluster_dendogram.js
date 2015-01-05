@@ -12,7 +12,7 @@ var viz = function($element, layout, _this) {
 		nest = nest.key(createNestingFunction(i));
 	};
 
-	nest = {key: "root",values:nest.entries(data)};
+	nest = {key: layout.title,values:nest.entries(data)};
 
 	// viz
 	var width = ext_width,
