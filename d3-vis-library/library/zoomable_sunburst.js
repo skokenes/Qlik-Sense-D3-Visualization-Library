@@ -1,5 +1,5 @@
 var viz = function($element, layout, _this) {
-    var id = setupContainer($element,layout,"d3vl_zoom_sunburst"),
+    var id = senseUtils.setupContainer($element,layout,"d3vl_zoom_sunburst"),
         ext_width = $element.width(),
         ext_height = $element.height();
 
@@ -12,8 +12,6 @@ var viz = function($element, layout, _this) {
     var width = ext_width - 5,
         height = ext_height - 5,
         radius = (Math.min(width, height) / 2.2);
-
-    console.log(radius);
 
     var x = d3.scale.linear().range([0, 2 * Math.PI]);
 

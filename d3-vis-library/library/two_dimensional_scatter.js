@@ -1,5 +1,5 @@
 var viz = function($element, layout, _this) {
-	var id = setupContainer($element,layout,"d3vl_two_dim_scatter"),
+	var id = senseUtils.setupContainer($element,layout,"d3vl_two_dim_scatter"),
 		ext_width = $element.width(),
 		ext_height = $element.height();
 
@@ -54,7 +54,7 @@ var viz = function($element, layout, _this) {
 	      .attr("x", width)
 	      .attr("y", -6)
 	      .style("text-anchor", "end")
-	      .text(getMeasureLabel(1,layout));
+	      .text(senseUtils.getMeasureLabel(1,layout));
 
 	  plot.append("g")
 	      .attr("class", "y axis")
@@ -65,7 +65,7 @@ var viz = function($element, layout, _this) {
 	      .attr("y", 6)
 	      .attr("dy", ".71em")
 	      .style("text-anchor", "end")
-	      .text(getMeasureLabel(2,layout))
+	      .text(senseUtils.getMeasureLabel(2,layout))
 
 	  plot.selectAll(".dot")
 	      .data(data)
@@ -79,7 +79,7 @@ var viz = function($element, layout, _this) {
 	      	d.dim(1).qSelect();
 	      })
 	      .append("title")
-	      .text(function(d) {return getDimLabel(1,layout) + ": " + d.dim(1).qText});
+	      .text(function(d) {return senseUtils.getDimLabel(1,layout) + ": " + d.dim(1).qText});
 
 	  var legend = plot.selectAll(".legend")
 	      .data(color.domain())

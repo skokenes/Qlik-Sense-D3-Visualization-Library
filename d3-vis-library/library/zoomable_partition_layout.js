@@ -1,5 +1,5 @@
 var viz = function($element, layout, _this) {
-	var id = setupContainer($element,layout,"d3vl_zoom_partition"),
+	var id = senseUtils.setupContainer($element,layout,"d3vl_zoom_partition"),
 		ext_width = $element.width(),
 		ext_height = $element.height();
 
