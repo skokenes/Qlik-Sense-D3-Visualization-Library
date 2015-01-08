@@ -1,6 +1,6 @@
 var viz = function($element,layout,_this) {
 
-	var id = setupContainer($element,layout,"d3vl_slope"),
+	var id = senseUtils.setupContainer($element,layout,"d3vl_slope"),
 		ext_width = $element.width(),
 		ext_height = $element.height();
 
@@ -59,11 +59,11 @@ var viz = function($element,layout,_this) {
 
 	svg.append("text")
 		.attr("class","title")
-		.text(getMeasureLabel(1,layout));
+		.text(senseUtils.getMeasureLabel(1,layout));
 
 	svg.append("text")
 		.attr("class","title")
-		.text(getMeasureLabel(2,layout));
+		.text(senseUtils.getMeasureLabel(2,layout));
 
 	// Get the temp axis max label width
 	var label_width = d3.max(svg.selectAll(".label-left, .label-right, .title")[0], function(d) {return d.clientWidth});
@@ -117,14 +117,14 @@ var viz = function($element,layout,_this) {
 
 	svg.append("text")
 		.attr("class","title")
-		.text(getMeasureLabel(1,layout))
+		.text(senseUtils.getMeasureLabel(1,layout))
 		.attr("x",x(1)-10 + margin.left)
 		.attr("y",10)
 		.attr("text-anchor","end");
 
 	svg.append("text")
 		.attr("class","title")
-		.text(getMeasureLabel(2,layout))
+		.text(senseUtils.getMeasureLabel(2,layout))
 		.attr("x",x(2)+10 + margin.left)
 		.attr("y",10)
 		.attr("text-anchor","start");

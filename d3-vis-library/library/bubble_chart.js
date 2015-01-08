@@ -1,11 +1,13 @@
 var viz = function($element, layout, _this) {
-	var id = setupContainer($element,layout,"d3vl_zoom_partition"),
+	var id = senseUtils.setupContainer($element,layout,"d3vl_zoom_partition"),
 		ext_width = $element.width(),
 		ext_height = $element.height();
 
 	var data = layout.qHyperCube.qDataPages[0].qMatrix;
 
 	var dim_count = layout.qHyperCube.qDimensionInfo.length;
+
+
 
 	var root = {name: layout.title, children: senseD3.createFamily(data,dim_count)};
 

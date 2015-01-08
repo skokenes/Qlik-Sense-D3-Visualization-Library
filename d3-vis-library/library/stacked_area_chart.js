@@ -1,6 +1,6 @@
 var viz = function($element,layout,_this) {
 
-	var id = setupContainer($element,layout,"d3vl_stacked_area"),
+	var id = senseUtils.setupContainer($element,layout,"d3vl_stacked_area"),
 		ext_width = $element.width(),
 		ext_height = $element.height();
 

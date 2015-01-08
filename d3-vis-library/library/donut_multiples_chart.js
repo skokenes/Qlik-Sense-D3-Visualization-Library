@@ -1,6 +1,6 @@
 var viz = function($element,layout,_this) {
 
-	var id = setupContainer($element,layout,"d3vl_donut_multiples"),
+	var id = senseUtils.setupContainer($element,layout,"d3vl_donut_multiples"),
 		ext_width = $element.width(),
 		ext_height = $element.height();
 

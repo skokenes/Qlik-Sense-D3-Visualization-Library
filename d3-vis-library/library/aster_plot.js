@@ -1,7 +1,7 @@
 var viz = function($element,layout,_this) {
 
 
-	var id = setupContainer($element,layout,"d3vl_aster"),
+	var id = senseUtils.setupContainer($element,layout,"d3vl_aster"),
 		ext_width = $element.width(),
 		ext_height = $element.height();
 
@@ -28,7 +28,7 @@ var viz = function($element,layout,_this) {
 		  .offset([0, 0])
 		  .html(function(d) {
 		  	var table;
-		  	table = "<table><tr><td>Dimension</td><td><span style='color:orangered'>" + d.data.dim(1).qText + "</span></td></tr><tr><td>" + getMeasureLabel(1,layout) + "</td><td><span style='color:orangered'>" + d.data.measure(1).qText + "</span></td></tr><tr><td>" + getMeasureLabel(2,layout) + "</td><td><span style='color:orangered'>" + d.data.measure(2).qText + "</span></td></tr></table>";
+		  	table = "<table><tr><td>Dimension</td><td><span style='color:orangered'>" + d.data.dim(1).qText + "</span></td></tr><tr><td>" + senseUtils.getMeasureLabel(1,layout) + "</td><td><span style='color:orangered'>" + d.data.measure(1).qText + "</span></td></tr><tr><td>" + senseUtils.getMeasureLabel(2,layout) + "</td><td><span style='color:orangered'>" + d.data.measure(2).qText + "</span></td></tr></table>";
 		    return table;
 		    //d.data.dim(1).qText + ": <span style='color:orangered'>" + d.data.measure(2).qNum + "</span>";
 		  });

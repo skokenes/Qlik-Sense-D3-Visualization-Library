@@ -1,6 +1,6 @@
 var viz = function($element,layout,_this) {
 
-	var id = setupContainer($element,layout,"d3vl_radar"),
+	var id = senseUtils.setupContainer($element,layout,"d3vl_radar"),
 		ext_width = $element.width(),
 		ext_height = $element.height();
 		

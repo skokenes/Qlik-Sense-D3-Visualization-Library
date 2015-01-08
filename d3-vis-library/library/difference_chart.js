@@ -1,6 +1,6 @@
 var viz = function($element,layout,_this) {
 
-	var id = setupContainer($element,layout,"d3vl_difference"),
+	var id = senseUtils.setupContainer($element,layout,"d3vl_difference"),
 		ext_width = $element.width(),
 		ext_height = $element.height();
 
@@ -91,6 +91,6 @@ var viz = function($element,layout,_this) {
 	      .attr("y", 6)
 	      .attr("dy", ".71em")
 	      .style("text-anchor", "end")
-	      .text(getMeasureLabel(1,layout));
+	      .text(senseUtils.getMeasureLabel(1,layout));
 
 }

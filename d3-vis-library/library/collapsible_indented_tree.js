@@ -1,5 +1,5 @@
 var viz = function($element, layout, _this) {
-	var id = setupContainer($element,layout,"d3vl_collapse_indented_tree"),
+	var id = senseUtils.setupContainer($element,layout,"d3vl_collapse_indented_tree"),
 		ext_width = $element.width(),
 		ext_height = $element.height();
 

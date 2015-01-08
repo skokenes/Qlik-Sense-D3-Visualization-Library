@@ -1,4 +1,4 @@
-﻿define( ["jquery", "text!./d3-vis-library.css","./js/d3.min","./js/senseD3utils","./library/contents"
+﻿define( ["jquery", "text!./d3-vis-library.css","./js/d3.min","./js/senseD3utils","./js/senseUtils","./library/contents"
 ],
 function($, cssContent) {
 	'use strict';
@@ -50,9 +50,9 @@ function($, cssContent) {
 			canTakeSnapshot : true
 		},
 		paint: function ($element,layout) {
-			
+
 			var self = this;
-			extendLayout(layout,self);
+			senseUtils.extendLayout(layout,self);
 			var dim_count = layout.qHyperCube.qDimensionInfo.length;
 			var measure_count = layout.qHyperCube.qMeasureInfo.length;
 
@@ -87,15 +87,6 @@ function($, cssContent) {
 
 
 // Helper functions
-
-function getMeasureLabel(n,layout) {
-	return layout.qHyperCube.qMeasureInfo[n-1].qFallbackTitle;
-}
-
-function getDimLabel(n,layout) {
-	return layout.qHyperCube.qDimensionInfo[n-1].qFallbackTitle;
-}
-
 function getLabelWidth(axis,svg) {
 	// Create a temporary yAxis to get the width needed for labels and add to the margin
 	svg.append("g")
@@ -111,55 +102,3 @@ function getLabelWidth(axis,svg) {
 
 	return label_width;
 }
-
-function setupContainer($element,layout,class_name) {
-	// Properties: height, width, id
-	var ext_height = $element.height(),
-		ext_width = $element.width(), 
-		id = "ext_" + layout.qInfo.qId;
-
-	// Initialize or clear out the container and its classes
-	if (!document.getElementById(id)) {
-		$element.append($("<div />").attr("id",id));
-	}
-
-	else {
-	
-		$("#" + id)
-			.empty()
-			.removeClass();
-
-	}
-
-	// Set the containers properties like width, height, and class
-	
-	$("#" + id)
-		.width(ext_width)
-		.height(ext_height)
-		.addClass(class_name);
-
-	return id;
-}
-
-function extendLayout(layout,self) {
-	var dim_count = layout.qHyperCube.qDimensionInfo.length;
-
-	layout.qHyperCube.qDataPages[0].qMatrix.forEach(function(d) {
-		d.dim = function(i) {
-			return d[i-1];
-		};
-		d.measure = function(i) {
-			return d[i+dim_count-1];
-		};
-
-		for (var i = 0; i<dim_count; i++) {
-			d[i].qSelf = self;
-			d[i].qIndex = i;
-			d[i].qSelect = function() {
-				this.qSelf.backendApi.selectValues(this.qIndex,[this.qElemNumber],true);	
-			}
-					
-		};
-	});
-}
-

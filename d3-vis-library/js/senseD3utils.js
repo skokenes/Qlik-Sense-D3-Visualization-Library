@@ -34,7 +34,6 @@ var senseD3 = {
         for(s in dataSet){
             var d = dataSet[s];
             for(i=0; i<numDims-1; i++){
-
                 if (parentsA.indexOf(d[i].qText) === -1) {
                     parentsA.push(d[i].qText);
                 }
