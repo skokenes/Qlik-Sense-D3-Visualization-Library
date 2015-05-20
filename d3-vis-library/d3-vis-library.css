@@ -36,9 +36,26 @@
   display: none;
 }
 
-.qv-object-d3-vis-library .d3vl_stacked_bar {
+/*.qv-object-d3-vis-library .d3vl_stacked_bar {
   font: 10px sans-serif;
 }
+*/
+@media screen and (max-width: 640px) {
+  .d3vl_stacked_bar {
+    font: 10px sans-serif;
+  }
+}
+@media screen and (min-width: 641px) and (max-width: 1024px) {
+  .d3vl_stacked_bar {
+    font: 15px sans-serif;
+  }
+}
+@media screen and (min-width: 1025px) {
+  .d3vl_stacked_bar {
+    font: 20px sans-serif;
+  }
+}
+
 
 .qv-object-d3-vis-library .d3vl_stacked_bar .axis path,
 .qv-object-d3-vis-library .d3vl_stacked_bar .axis line {
@@ -55,8 +72,24 @@
   display: none;
 }
 
-.qv-object-d3-vis-library .d3vl_normalized_stacked_bar {
+/*.qv-object-d3-vis-library .d3vl_normalized_stacked_bar {
   font: 10px sans-serif;
+}
+*/
+@media screen and (max-width: 640px) {
+  .d3vl_normalized_stacked_bar {
+    font: 10px sans-serif;
+  }
+}
+@media screen and (min-width: 641px) and (max-width: 1024px) {
+  .d3vl_normalized_stacked_bar {
+    font: 15px sans-serif;
+  }
+}
+@media screen and (min-width: 1025px) {
+  .d3vl_normalized_stacked_bar {
+    font: 20px sans-serif;
+  }
 }
 
 .qv-object-d3-vis-library .d3vl_normalized_stacked_bar .axis path,
@@ -79,8 +112,26 @@
   shape-rendering: crispEdges;
 }
 
+/*
 .qv-object-d3-vis-library .d3vl_grouped_bar {
   font: 10px sans-serif;
+}
+*/
+
+@media screen and (max-width: 640px) {
+  .d3vl_grouped_bar {
+    font: 10px sans-serif;
+  }
+}
+@media screen and (min-width: 641px) and (max-width: 1024px) {
+  .d3vl_grouped_bar {
+    font: 15px sans-serif;
+  }
+}
+@media screen and (min-width: 1025px) {
+  .d3vl_grouped_bar {
+    font: 20px sans-serif;
+  }
 }
 
 .qv-object-d3-vis-library .d3vl_grouped_bar .axis path,
