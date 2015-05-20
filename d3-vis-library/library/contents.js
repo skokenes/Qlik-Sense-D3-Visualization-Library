@@ -249,3 +249,12 @@ var content_options = charts.map(function(d) {
 		label: d.name
 	}
 });
+
+var responsive_options = [
+	{
+		value: false,
+		label: "No"
+	}, {
+		value: true,
+		label: "Yes"
+	}];

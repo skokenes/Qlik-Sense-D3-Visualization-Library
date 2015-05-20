@@ -50,6 +50,14 @@
 								ref: "chart",
 								options: content_options,
 								defaultValue: 1
+							},
+							ResponsiveCheckbox: {
+								type: "boolean",
+								component: "switch",
+								label: "Responsive",
+								ref: "responsive",
+								options: responsive_options,
+								defaultValue: true
 							}
 						}
 					}
@@ -60,6 +68,22 @@
 			},
 			paint: function($element, layout) {
 				var self = this;
+
+				// Responsive: change between multi-dim bar chart types
+				if(layout.responsive){
+					if((layout.chart == 2) || (layout.chart == 3) || (layout.chart == 4)) {
+						var w = $element.width();
+
+						if(w <= 640){
+							layout.chart = 4;
+						}else if(w <= 1024){
+							layout.chart = 3;
+						}else{
+							layout.chart = 2;
+						}
+					}
+				}
+
 				senseUtils.extendLayout(layout, self);
 				var dim_count = layout.qHyperCube.qDimensionInfo.length;
 				var measure_count = layout.qHyperCube.qMeasureInfo.length;
@@ -100,6 +124,10 @@
 
 				}
 
+			},
+			resize:function($el,layout){
+				console.log("repainting...");
+				this.paint($el,layout);
 			}
 		};
 

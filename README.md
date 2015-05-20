@@ -14,3 +14,5 @@ To use the extension:
 3. Add dimensions and measures and pick a chart type from the chart settings.
 
 ![settings](http://viz.axisgroup.com/d3vl/img/sidebar_edit.png "Settings")
+
+Enable the responsive setting to dynamically switch between grouped bar, stacked bar and normalized stacked bar chart based on the browser resolution.

@@ -36,6 +36,11 @@ var viz = function($element, layout, _this) {
 	root.x0 = 0;
 	root.y0 = 0;
 	update(root);
+	if(layout.responsive){
+		root.children.forEach(function(n) {
+			click(n);
+		});
+	}
 
 	function update(source) {
 
@@ -128,6 +133,9 @@ var viz = function($element, layout, _this) {
 	  nodes.forEach(function(d) {
 	    d.x0 = d.x;
 	    d.y0 = d.y;
+	    // if(d.depth == 1){
+	    // 	click(d);
+	    // }
 	  });
 	}
 
