@@ -70,6 +70,9 @@
 				var self = this;
 
 				// Responsive: change between multi-dim bar chart types
+				if(typeof layout.responsive == 'undefined'){
+					layout.responsive = true;
+				}
 				if(layout.responsive){
 					if((layout.chart == 2) || (layout.chart == 3) || (layout.chart == 4)) {
 						var w = $element.width();
@@ -126,7 +129,6 @@
 
 			},
 			resize:function($el,layout){
-				console.log("repainting...");
 				this.paint($el,layout);
 			}
 		};
