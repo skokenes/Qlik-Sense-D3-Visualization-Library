@@ -34,35 +34,25 @@ var viz = function($element, layout, _this) {
 						.key(function(d) {return d.dim(1).qText})
 						.entries(data);
 	
-
+	var cumulative = 0;
 	nested_data.forEach(function(d) {
 		var y0=0;
-		var z0=0;
 		d.values.forEach(function(e) {
 			var currentMeasure = e.measure(1);
 			currentMeasure.y0 = y0;
 			currentMeasure.y1 = y0 += currentMeasure.qNum;
-			
-			var secondMeasure = e.measure(2);
-			secondMeasure.z0 = z0; 			
-			secondMeasure.z1 = z0 += secondMeasure.qNum; 
 		});
 		d.total = d.values[d.values.length-1].measure(1).y1;
-		d.second_total = d.values[d.values.length-1].measure(2).z1;
+		d.cumulative = cumulative + d.total;
+		cumulative = d.cumulative;
 	});
 
-	var line_data = d3.nest()
-						.key(function(d) {return d.dim(1).qText})
-						.entries(data);
-
-	var data = [];
-	line_data.forEach(function(d) {
-		var arr = [];
-		d.values.forEach(function(e) {
-			arr[0] = e.dim(1);
-			arr[1] = e.measure(2);	
-		});
-		data.push(arr);	 
+	
+	var line_data = nested_data.map(function(d) {
+		return {
+			"dim1":d.key,
+			"measure1": d.cumulative
+		}
 	});
 	
 	x.domain(nested_data.map(function(d) {return d.key;}));
@@ -153,22 +143,21 @@ var viz = function($element, layout, _this) {
 	
 	// Add line chart
 	var line = d3.svg.line()
-	    .x(function(d) { return x(d[0].qText); })
-	    .y(function(d) { return y(d[1].z1); }); 
+	    .x(function(d) { return x(d.dim1); })
+	    .y(function(d) { return y(d.measure1); }); 
 		
-	x.domain(data.map(function(d) { return d[0].qText; })); 
- 	y.domain(d3.extent(data, function(d) { return d[1].z1; })); 
-	y.domain([0, d3.max(data, function(d) { return d[1].z1; })]); 
+	x.domain(line_data.map(function(d) { return d.dim1; })); 
+ 	y.domain(d3.extent(line_data, function(d) { return d.measure1; })); 
+	y.domain([0, d3.max(line_data, function(d) { return d.measure1; })]); 
  
  	plot.append("path")
-		.datum(data) 
+		.datum(line_data) 
 		.attr("class", "line")
 		.attr("d", line)
 		.attr("stroke", "blue")
 		.attr("transform", function(d) { return "translate("+width/18+",0)"; }) 
 		.attr("fill", "none");
 		
-
 	plot = svg.append("g")
 		.attr("transform", "translate("+(width-0)+", 20)") 
 		yAxis = d3.svg.axis()
@@ -183,7 +172,7 @@ var viz = function($element, layout, _this) {
 		.attr("dy", ".71em")
 		.style("text-anchor", "end")
 		.attr("transform", "rotate(-90) translate(0, -20)") 
-		.text(senseUtils.getMeasureLabel(2,layout));
+		.text(senseUtils.getMeasureLabel(1,layout));
 	
 	/**/
 }
