@@ -239,6 +239,14 @@ var charts = [
 		min_dims:2,
 		max_dims:2,
 		measures:1
+	},
+	{
+		name:"Stacked Bar with Line Chart",
+		id:31,
+		src:"stacked_bar_with_line.js",
+		min_dims:2,
+		max_dims:2,
+		measures:2
 	}	
 ];
 
