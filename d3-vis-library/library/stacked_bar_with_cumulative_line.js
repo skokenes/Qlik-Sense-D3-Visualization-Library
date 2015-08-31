@@ -83,7 +83,8 @@ var viz = function($element, layout, _this) {
 	margin.left = margin.left + label_width;
 	margin.right = margin.right + legend_width;
 	width = ext_width - margin.left - margin.right;
-	x.rangeRoundBands([0, width-60], .1);
+	var bar_chart_width = width - 80;		
+	x.rangeRoundBands([0, bar_chart_width], .1);
 	  
 	var plot = svg.append("g")
 	    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -149,17 +150,18 @@ var viz = function($element, layout, _this) {
 	x.domain(line_data.map(function(d) { return d.dim1; })); 
  	y.domain(d3.extent(line_data, function(d) { return d.measure1; })); 
 	y.domain([0, d3.max(line_data, function(d) { return d.measure1; })]); 
- 
+	
  	plot.append("path")
 		.datum(line_data) 
 		.attr("class", "line")
 		.attr("d", line)
 		.attr("stroke", "blue")
-		.attr("transform", function(d) { return "translate("+width/18+",0)"; }) 
+		.attr("stroke-width", "2")
+		.attr("transform", function(d) { return "translate("+x.rangeBand()/2+",0)"; }) 
 		.attr("fill", "none");
 		
 	plot = svg.append("g")
-		.attr("transform", "translate("+(width-0)+", 20)") 
+		.attr("transform", "translate("+ width +", 20)") 
 		yAxis = d3.svg.axis()
 	    .scale(y)
 	    .orient("right");
