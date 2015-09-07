@@ -93,7 +93,8 @@ var viz = function($element, layout, _this) {
 	margin.left = margin.left + label_width;
 	margin.right = margin.right + legend_width;
 	width = ext_width - margin.left - margin.right;
-	x.rangeRoundBands([0, width-60], .1);
+	var bar_chart_width = width - 80;
+	x.rangeRoundBands([0, bar_chart_width], .1);
 	  
 	var plot = svg.append("g")
 	    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -112,7 +113,6 @@ var viz = function($element, layout, _this) {
 		.attr("dy", ".71em")
 		.style("text-anchor", "end")
 		.text(senseUtils.getMeasureLabel(1,layout));
-
 
 
 	var dim1 = plot.selectAll(".dim1")
@@ -165,12 +165,13 @@ var viz = function($element, layout, _this) {
 		.attr("class", "line")
 		.attr("d", line)
 		.attr("stroke", "blue")
-		.attr("transform", function(d) { return "translate("+width/18+",0)"; }) 
+		.attr("stroke-width", "2")
+		.attr("transform", function(d) { return "translate("+x.rangeBand()/2+",0)"; }) 
 		.attr("fill", "none");
 		
 
 	plot = svg.append("g")
-		.attr("transform", "translate("+(width-0)+", 20)") 
+		.attr("transform", "translate("+ width +", 20)") 
 		yAxis = d3.svg.axis()
 	    .scale(y)
 	    .orient("right");
