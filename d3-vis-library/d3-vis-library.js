@@ -1,15 +1,13 @@
-﻿define(["jquery", "./js/d3.min", "./js/senseD3utils", "./js/senseUtils", "./library/contents"],
+define(["jquery", "./js/d3.min", "./js/senseD3utils", "./js/senseUtils", "./library/contents"],
 	function($) {
 		'use strict';
 
-		//Accessing requirejs semi-private API - This might break in future versions of require.
-		var base = requirejs.s.contexts._.config.baseUrl + requirejs.s.contexts._.config.paths.extensions
-
+		//Use requirejs toUrl to get the URL.
 		//Load external CSS instead of inlining to work in desktop/server/mashups
 		$("<link/>", {
 			rel: "stylesheet",
 			type: "text/css",
-			href: base + "/d3-vis-library/d3-vis-library.css"
+			href: require.toUrl( "extensions/d3-vis-library/d3-vis-library.css")
 		}).appendTo("head");
 
 		var lastUsedChart = -1;
@@ -112,7 +110,7 @@
 							return d.id === layout.chart
 						})[0].src;
 
-						var url = base + "/d3-vis-library/library/" + src;
+						var url =require.toUrl( "extensions/d3-vis-library/library/" + src);
 
 						// Load in the appropriate script and viz
 						jQuery.getScript(url, function() {
