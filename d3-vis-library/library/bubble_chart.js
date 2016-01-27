@@ -37,11 +37,29 @@ var viz = function($element, layout, _this) {
 	      .text(function(d) { return d.className + ": " + format(d.value); });
 
 	  node.append("circle")
+	      .each(function(d){
+	      	d.classDim = d.depth > 0 ? layout.qHyperCube.qDimensionInfo[layout.qHyperCube.qDimensionInfo.length-1].qFallbackTitle.replace(/\s+/g, '-') : "-";
+	      	d.cssID = d.className.replace(/\s+/g, '-');
+	      })
+	      .attr("class", function(d){
+	      	return d.classDim;
+	      })
+	      .attr("id", function(d) { return d.cssID; })
 	      .attr("r", function(d) { return d.r; })
 	      .style("fill", function(d) { return color(d.packageName); })
 	      .on("click", function(d) {
 	      	console.log(d);
-	      });
+	      })
+  		  .on("mouseover", function(d){
+			d3.selectAll($("."+d.classDim+"#"+d.cssID)).classed("highlight",true);
+	      	d3.selectAll($("."+d.classDim+"[id!="+d.cssID+"]")).classed("dim",true);
+	      	d3.selectAll($("circle"+"[id!="+d.cssID+"]")).classed("dim",true);
+		  })
+		  .on("mouseout", function(d){
+			d3.selectAll($("."+d.classDim+"#"+d.cssID)).classed("highlight",false);
+	      	d3.selectAll($("."+d.classDim+"[id!="+d.cssID+"]")).classed("dim",false);
+	      	d3.selectAll($("circle"+"[id!="+d.cssID+"]")).classed("dim",false);
+		  });
 
 	  node.append("text")
 	      .attr("dy", ".3em")

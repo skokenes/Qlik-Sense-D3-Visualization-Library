@@ -2,7 +2,8 @@ var viz = function($element,layout,_this) {
 
 	var id = senseUtils.setupContainer($element,layout,"d3vl_stacked_area"),
 		ext_width = $element.width(),
-		ext_height = $element.height();
+		ext_height = $element.height(),
+		classDim = layout.qHyperCube.qDimensionInfo[1].qFallbackTitle.replace(/\s+/g, '-');
 
 	var data = layout.qHyperCube.qDataPages[0].qMatrix;
 
@@ -71,11 +72,20 @@ var viz = function($element,layout,_this) {
 		.attr("class", "browser");
 
 	browser.append("path")
-		.attr("class", "area")
+		.attr("class", "area "+classDim)
+      	.attr("id", function(d) { return d.key; })
 		.attr("d", function(d) { return area(d.values); })
 		.style("fill", function(d) { return color(d.key); })
 		.on("click", function(d) {
 			d.values[0].dim(2).qSelect();
+		})
+		.on("mouseover", function(d){
+			d3.selectAll($("."+classDim+"#"+d.key)).classed("highlight",true);
+	      	d3.selectAll($("."+classDim+"[id!="+d.key+"]")).classed("dim",true);
+		})
+		.on("mouseout", function(d){
+			d3.selectAll($("."+classDim+"#"+d.key)).classed("highlight",false);
+	      	d3.selectAll($("."+classDim+"[id!="+d.key+"]")).classed("dim",false);
 		});
 
 	browser.append("text")

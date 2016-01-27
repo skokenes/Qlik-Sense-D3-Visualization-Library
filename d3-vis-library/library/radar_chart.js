@@ -67,7 +67,8 @@ var viz = function($element,layout,_this) {
 							axis: e.dim(2).qText,
 							value: e.measure(1).qNum
 						};
-					})
+					}),
+					dimensions: dimensions
 				};
 			})
 		}

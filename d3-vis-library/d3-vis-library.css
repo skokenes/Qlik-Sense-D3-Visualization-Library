@@ -17,9 +17,11 @@
   fill: steelblue;
 }
 
+/*
 .qv-object-d3-vis-library .d3vl_bar .bar:hover {
   fill: brown;
 }
+*/
 
 .qv-object-d3-vis-library .d3vl_bar .axis {
   font: 10px sans-serif;
@@ -656,4 +658,21 @@
 .qv-object-d3-vis-library .d3vl_zoom_sunburst path {
   stroke: #fff;
   fill-rule: evenodd;
+}
+
+.qv-object-d3-vis-library .highlight {
+  stroke-width: 2.5 !important;
+  stroke: red !important;
+  border: solid 2.5px red !important;
+  /*fill: #4682B4 !important;*/
+  opacity: 1 !important;
+  transition: stroke 250ms;
+  transition: stroke-width 250ms;
+  transition: border 250ms;
+  transition: opacity 250ms;
+}
+
+.qv-object-d3-vis-library .dim {
+  opacity: 0.4;
+  transition: opacity 250ms;
 }

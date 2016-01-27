@@ -47,7 +47,25 @@ var viz = function($element, layout, _this) {
 	      .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
 
 	  node.append("circle")
-	      .attr("r", 4.5);
+	      .each(function(d){
+	      	d.classDim = d.depth > 0 ? layout.qHyperCube.qDimensionInfo[d.depth-1].qFallbackTitle.replace(/\s+/g, '-') : "-";
+	      	d.cssID = d.values ? d.key : d.dim(dim_count).qText.replace(/\s+/g, '-');
+	      })
+	      .attr("class", function(d){
+	      	return d.classDim;
+	      })
+	      .attr("id", function(d) { return d.cssID; })
+	      .attr("r", 4.5)
+		  .on("mouseover", function(d){
+			d3.selectAll($("."+d.classDim+"#"+d.cssID)).classed("highlight",true);
+	      	d3.selectAll($("."+d.classDim+"[id!="+d.cssID+"]")).classed("dim",true);
+	      	d3.selectAll($("circle"+"[id!="+d.cssID+"]")).classed("dim",true);
+		  })
+		  .on("mouseout", function(d){
+			d3.selectAll($("."+d.classDim+"#"+d.cssID)).classed("highlight",false);
+	      	d3.selectAll($("."+d.classDim+"[id!="+d.cssID+"]")).classed("dim",false);
+	      	d3.selectAll($("circle"+"[id!="+d.cssID+"]")).classed("dim",false);
+		  });
 
 	  node.append("text")
 	      .attr("dx", function(d) { return d.values ? -8 : 8; })

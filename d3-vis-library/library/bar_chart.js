@@ -1,7 +1,8 @@
 var viz = function($element, layout, _this) {
 	var id = senseUtils.setupContainer($element,layout,"d3vl_bar"),
 		ext_width = $element.width(),
-		ext_height = $element.height();
+		ext_height = $element.height(),
+		classDim = layout.qHyperCube.qDimensionInfo[0].qFallbackTitle.replace(/\s+/g, '-');
 
 	var data = layout.qHyperCube.qDataPages[0].qMatrix;
 
@@ -58,13 +59,24 @@ var viz = function($element, layout, _this) {
 	plot.selectAll(".bar")
 	      .data(data)
 	    .enter().append("rect")
-	      .attr("class", "bar")
+	      .attr("class", "bar "+ classDim)
+	      .attr("id", function(d) { return d.dim(1).qText; })
 	      .attr("x", function(d) { return x(d.dim(1).qText); })
 	      .attr("width", x.rangeBand())
 	      .attr("y", function(d) { return y(d.measure(1).qNum); })
 	      .attr("height", function(d) { return height - y(d.measure(1).qNum); })
 	      .on("click",function(d) {
 	      	return d.dim(1).qSelect();
+	      })
+	      .on("mouseover", function(d){
+			var id = d.dim(1).qText;
+	      	console.log("id",id);
+	      	d3.selectAll($("."+classDim+"#"+d.dim(1).qText)).classed("highlight",true);
+	      	d3.selectAll($("."+classDim+"[id!="+d.dim(1).qText+"]")).classed("dim",true);
+	      })
+	      .on("mouseout", function(d){
+	      	d3.selectAll($("."+classDim+"#"+d.dim(1).qText)).classed("highlight",false);
+	      	d3.selectAll($("."+classDim+"[id!="+d.dim(1).qText+"]")).classed("dim",false);
 	      });
 	
 };

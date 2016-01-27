@@ -1,7 +1,8 @@
 var viz = function($element, layout, _this) {
 	var id = senseUtils.setupContainer($element,layout,"d3vl_two_dim_scatter"),
 		ext_width = $element.width(),
-		ext_height = $element.height();
+		ext_height = $element.height(),
+		classDim = layout.qHyperCube.qDimensionInfo[0].qFallbackTitle.replace(/\s+/g, '-');
 
 	var data = layout.qHyperCube.qDataPages[0].qMatrix;
 
@@ -70,7 +71,8 @@ var viz = function($element, layout, _this) {
 	  plot.selectAll(".dot")
 	      .data(data)
 	    .enter().append("circle")
-	      .attr("class", "dot")
+	      .attr("class", "dot "+classDim)
+      	  .attr("id", function(d) { return d.dim(1).qText; })
 	      .attr("r", 3.5)
 	      .attr("cx", function(d) { return x(d.measure(1).qNum); })
 	      .attr("cy", function(d) { return y(d.measure(2).qNum); })
@@ -78,6 +80,14 @@ var viz = function($element, layout, _this) {
 	      .on("click", function(d) {
 	      	d.dim(1).qSelect();
 	      })
+		  .on("mouseover", function(d){
+			d3.selectAll($("."+classDim+"#"+d.dim(1).qText)).classed("highlight",true);
+	      	d3.selectAll($("."+classDim+"[id!="+d.dim(1).qText+"]")).classed("dim",true);
+		  })
+		  .on("mouseout", function(d){
+			d3.selectAll($("."+classDim+"#"+d.dim(1).qText)).classed("highlight",false);
+	      	d3.selectAll($("."+classDim+"[id!="+d.dim(1).qText+"]")).classed("dim",false);
+		  })
 	      .append("title")
 	      .text(function(d) {return senseUtils.getDimLabel(1,layout) + ": " + d.dim(1).qText});
 

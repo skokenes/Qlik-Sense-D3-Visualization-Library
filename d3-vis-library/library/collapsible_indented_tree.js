@@ -69,11 +69,27 @@ var viz = function($element, layout, _this) {
 
 	  // Enter any new nodes at the parent's previous position.
 	  nodeEnter.append("rect")
+          .each(function(d){
+            d.classDim = d.depth > 0 ? layout.qHyperCube.qDimensionInfo[d.depth-1].qFallbackTitle.replace(/\s+/g, '-') : "-";
+            d.cssID = d.name.replace(/\s+/g, '-');
+          })
+          .attr("class", function(d) { return d.children ? "parent "+d.classDim : "child "+d.classDim; })
+          .attr("id", function(d) { return d.cssID; })
 	      .attr("y", -barHeight / 2)
 	      .attr("height", barHeight)
 	      .attr("width", barWidth)
 	      .style("fill", color)
-	      .on("click", click);
+	      .on("click", click)
+          .on("mouseover", function(d){
+            d3.selectAll($("."+d.classDim+"#"+d.cssID)).classed("highlight",true);
+	      	d3.selectAll($("."+d.classDim+"[id!="+d.cssID+"]")).classed("dim",true);
+	      	d3.selectAll($("circle"+"[id!="+d.cssID+"]")).classed("dim",true);
+          })
+          .on("mouseout", function(d){
+            d3.selectAll($("."+d.classDim+"#"+d.cssID)).classed("highlight",false);
+	      	d3.selectAll($("."+d.classDim+"[id!="+d.cssID+"]")).classed("dim",false);
+	      	d3.selectAll($("circle"+"[id!="+d.cssID+"]")).classed("dim",false);
+          });
 
 	  nodeEnter.append("text")
 	      .attr("dy", 3.5)

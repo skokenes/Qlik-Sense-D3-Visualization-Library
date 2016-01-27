@@ -97,7 +97,13 @@ var viz = function($element,layout,_this) {
 			.data(heat_data)
 			.enter()
 			.append("rect")
-			.attr("class","square")
+			.each(function(d){
+				d.classDim1 = layout.qHyperCube.qDimensionInfo[0].qFallbackTitle.replace(/\s+/g, '-');
+				d.classDim2 = layout.qHyperCube.qDimensionInfo[1].qFallbackTitle.replace(/\s+/g, '-');
+				d.cssID = (d.dim1 + "-" + d.dim2).replace(/\s+/g, '-');
+			})
+			.attr("class", function(d) { return "square "+d.classDim1+" "+d.classDim2; })
+			.attr("id", function(d) { return d.cssID; })
 			.attr("x",function(d) {return x(d.dim1)})
 			.attr("y",function(d) {return y(d.dim2)})
 			.attr("rx",4)
@@ -111,6 +117,14 @@ var viz = function($element,layout,_this) {
 				 	d.data.dim(2).qSelect();
 				 }
 			})
+	        .on("mouseover", function(d){
+	            d3.selectAll($("."+d.classDim1+"."+d.classDim2+"#"+d.cssID)).classed("highlight",true);
+		      	d3.selectAll($("."+d.classDim1+"."+d.classDim2+"[id!="+d.cssID+"]")).classed("dim",true);
+	        })
+	        .on("mouseout", function(d){
+	            d3.selectAll($("."+d.classDim1+"."+d.classDim2+"#"+d.cssID)).classed("highlight",false);
+		      	d3.selectAll($("."+d.classDim1+"."+d.classDim2+"[id!="+d.cssID+"]")).classed("dim",false);
+	        })
 			.append("title")
 			.text(function(d) {return d.value > 0 ? d.data.measure(1).qText : 0;});
 
