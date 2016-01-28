@@ -38,10 +38,10 @@
   display: none;
 }
 
-/*.qv-object-d3-vis-library .d3vl_stacked_bar {
+.qv-object-d3-vis-library .d3vl_stacked_bar {
   font: 10px sans-serif;
 }
-*/
+
 @media screen and (max-width: 640px) {
   .d3vl_stacked_bar {
     font: 10px sans-serif;

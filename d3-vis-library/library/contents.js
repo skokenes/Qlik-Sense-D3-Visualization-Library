@@ -239,7 +239,23 @@ var charts = [
 		min_dims:2,
 		max_dims:2,
 		measures:1
-	}	
+	},
+	{
+		name:"Stacked Bar with Line Chart",
+		id:31,
+		src:"stacked_bar_with_line.js",
+		min_dims:2,
+		max_dims:2,
+		measures:2
+	},
+	{
+		name:"Stacked Bar with Cumulative Line",
+		id:32,
+		src:"stacked_bar_with_cumulative_line.js",
+		min_dims:2,
+		max_dims:2,
+		measures:1
+	}		
 ];
 
 
