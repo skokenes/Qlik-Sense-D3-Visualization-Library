@@ -1,2 +1,3 @@
-basic-template.qext;
-basic-template.js;
+d3-vis-library.qext;
+d3-vis-library.js;
+d3-vis-library.css
