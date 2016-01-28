@@ -50,6 +50,7 @@ var viz = function($element, layout, _this) {
 		    if (s > max) max = s;
 		    if (s < min) min = s;
 		  });
+		var highlight_data = box_data;
 
 
 		var chart = d3.box()
@@ -62,12 +63,22 @@ var viz = function($element, layout, _this) {
 		var svg = d3.select("#" + id).selectAll("svg")
 			.data(box_data)
 			.enter().append("svg")
+            .each(function(d){
+              d.classDim = layout.qHyperCube.qDimensionInfo[0].qFallbackTitle.replace(/\s+/g, '-');
+              d.cssID = d.dim.replace(/\s+/g, '-');
+            })
 			.attr("class", "box")
 			.attr("width", width + margin.left + margin.right)
 			.attr("height", height + margin.bottom + margin.top)
 			.append("g")
 			.attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 			.call(chart);
+
+		// svg.selectAll("rect")
+		// 	.data(highlight_data)
+		// 	.each(function(d){
+		// 		console.log(d);
+		// 	})
 
 		svg.append("text")
 			.attr("transform","translate(0,-20)")

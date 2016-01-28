@@ -41,9 +41,24 @@ var viz = function($element, layout, _this) {
 	var circle = svg.selectAll("circle")
 		.data(nodes)
 		.enter().append("circle")
-		.attr("class", function(d) { return d.parent ? d.children ? "node" : "node--leaf" : "node node--root"; })
+		.each(function(d){
+			d.classDim = d.depth > 0 ? layout.qHyperCube.qDimensionInfo[d.depth-1].qFallbackTitle.replace(/\s+/g, '-') : "-";
+			d.cssID = d.children ? d.key.replace(/\s+/g, '-') : d.dim(dim_count).qText.replace(/\s+/g, '-');
+		})
+		.attr("class", function(d) { return d.parent ? d.children ? "node "+d.classDim : "node--leaf "+d.classDim : "node node--root"; })
+		.attr("id", function(d) { return d.cssID; })
 		//.style("fill", function(d) { return d.children ? color(d.depth) : null; })
-		.on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
+		.on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); })
+		.on("mouseover", function(d){
+			d3.selectAll($("."+d.classDim+"#"+d.cssID)).classed("highlight",true);
+	      	d3.selectAll($("."+d.classDim+"[id!="+d.cssID+"]")).classed("dim",true);
+	      	d3.selectAll($("circle"+"[id!="+d.cssID+"]")).classed("dim",true);
+		})
+		.on("mouseout", function(d){
+			d3.selectAll($("."+d.classDim+"#"+d.cssID)).classed("highlight",false);
+	      	d3.selectAll($("."+d.classDim+"[id!="+d.cssID+"]")).classed("dim",false);
+	      	d3.selectAll($("circle"+"[id!="+d.cssID+"]")).classed("dim",false);
+		});
 
 	var text = svg.selectAll("text")
 		.data(nodes)

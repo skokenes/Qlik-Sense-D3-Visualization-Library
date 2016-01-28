@@ -11,9 +11,17 @@ d3.box = function() {
       quartiles = boxQuartiles,
       tickFormat = null;
 
+  var indi = 0;
+
   // For each small multiple…
   function box(g) {
+    var cssObj = [];
     g.each(function(d, i) {
+
+      cssObj[i] = {};
+      cssObj[i].class = d.classDim;
+      cssObj[i].id    = d.cssID;
+
       d = d.map(value).sort(d3.ascending);
       var g = d3.select(this),
           n = d.length,
@@ -86,11 +94,26 @@ d3.box = function() {
           .data([quartileData]);
 
       box.enter().append("rect")
-          .attr("class", "box")
+            .each(function(d){
+              d.classDim = cssObj[indi].class;
+              d.cssID = cssObj[indi].id;
+              indi++;
+            })
+          .attr("class", function(d) { return "box " + d.classDim; })
+          .attr("id", function(d) { return d.cssID; })
+          // .attr("class", "box")
           .attr("x", 0)
           .attr("y", function(d) { return x0(d[2]); })
           .attr("width", width)
           .attr("height", function(d) { return x0(d[0]) - x0(d[2]); })
+          .on("mouseover", function(d){
+            d3.selectAll($("."+d.classDim+"#"+d.cssID)).classed("highlight",true);
+            d3.selectAll($("."+d.classDim+"[id!="+d.cssID+"]")).classed("dim",true);
+          })
+          .on("mouseout", function(d){
+            d3.selectAll($("."+d.classDim+"#"+d.cssID)).classed("highlight",false);
+            d3.selectAll($("."+d.classDim+"[id!="+d.cssID+"]")).classed("dim",false);
+          })
         .transition()
           .duration(duration)
           .attr("y", function(d) { return x1(d[2]); })

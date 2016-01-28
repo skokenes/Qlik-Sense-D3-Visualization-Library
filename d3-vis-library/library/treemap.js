@@ -40,7 +40,12 @@ var viz = function($element, layout, _this) {
 	var node = div.datum(nested_data).selectAll(".node")
       .data(treemap.nodes)
     .enter().append("div")
-      .attr("class", "node")
+	  .each(function(d){
+	  	d.classDim = d.depth > 0 ? layout.qHyperCube.qDimensionInfo[d.depth-1].qFallbackTitle.replace(/\s+/g, '-') : "-";
+	  	d.cssID = d.children ? d.key.replace(/\s+/g, '-') : d.dim(dim_count).qText.replace(/\s+/g, '-');
+	  })
+	  .attr("class", function(d) { return "node " + d.classDim; })
+	  .attr("id", function(d) { return d.cssID; })
       .call(position)
       .style("background", function(d) { return d.values ? color(d.key) : null; })
       .text(function(d) { return d.values ? null : d.dim(dim_count).qText; })
@@ -51,7 +56,17 @@ var viz = function($element, layout, _this) {
       	else {
       		d.dim(dim_count).qSelect();
       	}
-      });
+      })
+	  .on("mouseover", function(d){
+	  	d3.selectAll($("."+d.classDim+"#"+d.cssID)).classed("highlight",true);
+      	d3.selectAll($("."+d.classDim+"[id!="+d.cssID+"]")).classed("dim",true);
+      	d3.selectAll($("circle"+"[id!="+d.cssID+"]")).classed("dim",true);
+	  })
+	  .on("mouseout", function(d){
+	  	d3.selectAll($("."+d.classDim+"#"+d.cssID)).classed("highlight",false);
+      	d3.selectAll($("."+d.classDim+"[id!="+d.cssID+"]")).classed("dim",false);
+      	d3.selectAll($("circle"+"[id!="+d.cssID+"]")).classed("dim",false);
+	  });
 
     function position() {
 	  this.style("left", function(d) { return d.x + "px"; })

@@ -2,7 +2,8 @@ var viz = function($element,layout,_this) {
 
 	var id = senseUtils.setupContainer($element,layout,"d3vl_pie"),
 		ext_width = $element.width(),
-		ext_height = $element.height();
+		ext_height = $element.height(),
+		classDim = layout.qHyperCube.qDimensionInfo[0].qFallbackTitle.replace(/\s+/g, '-');
 
 	var data = layout.qHyperCube.qDataPages[0].qMatrix;
 
@@ -39,9 +40,19 @@ var viz = function($element,layout,_this) {
 
 	  g.append("path")
 	      .attr("d", arc)
+	      .attr("class", classDim)
+	      .attr("id", function(d) { return d.data.dim(1).qText; })
 	      .style("fill", function(d) { return color(d.data.dim(1).qText); })
 	      .on("click", function(d) {
 	      	d.data.dim(1).qSelect();
+	      })
+	      .on("mouseover", function(d){
+	      	d3.selectAll($("."+classDim+"#"+d.data.dim(1).qText)).classed("highlight",true);
+	      	d3.selectAll($("."+classDim+"[id!="+d.data.dim(1).qText+"]")).classed("dim",true);
+	      })
+	      .on("mouseout", function(d){
+	      	d3.selectAll($("."+classDim+"#"+d.data.dim(1).qText)).classed("highlight",false);
+	      	d3.selectAll($("."+classDim+"[id!="+d.data.dim(1).qText+"]")).classed("dim",false);
 	      });
 
 	  g.append("text")

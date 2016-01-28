@@ -73,14 +73,41 @@ var viz = function($element, layout, _this) {
 	  node.transition()
 	      .attr("r", function(d) { return d.children ? 4.5 : radius(d.size); });
 
+		var depth;
+		function traverse(thing){
+		    if (thing.children){
+		        depth++;
+		        traverse(thing.children[0]);
+		    }
+		}
+
 	  // Enter any new nodes.
 	  node.enter().append("svg:circle")
-	      .attr("class", "node")
+          .each(function(d){
+            depth = 1;
+            traverse(d);
+            d.depth = depth;
+
+            d.classDim = d.depth <= dim_count ? layout.qHyperCube.qDimensionInfo[dim_count - d.depth].qFallbackTitle.replace(/\s+/g, '-') : "-";
+            d.cssID = d.name.replace(/\s+/g, '-');
+          })
+          .attr("class", function(d) { return "node " + d.classDim; })
+          .attr("id", function(d) { return d.cssID; })
 	      .attr("cx", function(d) { return d.x; })
 	      .attr("cy", function(d) { return d.y; })
 	      .attr("r", function(d) { return d.children ? 4.5 : radius(d.size); })
 	      .style("fill", color)
 	      .on("click", click)
+          .on("mouseover", function(d){
+            d3.selectAll($("."+d.classDim+"#"+d.cssID)).classed("highlight",true);
+	      	d3.selectAll($("."+d.classDim+"[id!="+d.cssID+"]")).classed("dim",true);
+	      	d3.selectAll($("circle"+"[id!="+d.cssID+"]")).classed("dim",true);
+          })
+          .on("mouseout", function(d){
+            d3.selectAll($("."+d.classDim+"#"+d.cssID)).classed("highlight",false);
+	      	d3.selectAll($("."+d.classDim+"[id!="+d.cssID+"]")).classed("dim",false);
+	      	d3.selectAll($("circle"+"[id!="+d.cssID+"]")).classed("dim",false);
+          })
 	      .call(force.drag)
 	      .append("title")
 	      .text(function(d) {

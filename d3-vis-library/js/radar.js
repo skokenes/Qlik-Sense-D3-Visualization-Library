@@ -176,14 +176,34 @@ var RadarChart = {
         var polygon = container.selectAll(".area").data(data, cfg.axisJoin);
 
         polygon.enter().append('polygon')
+          .each(function(d){
+            d.classDim = d.dimensions[0].qFallbackTitle.replace(/\s+/g, '-');
+            d.cssID = d.className.replace(/\s+/g, '-');
+            d.axes.forEach(function(dd){
+              dd.classDim = d.classDim;
+              dd.cssID = d.cssID;
+            })
+          })
+          .attr("class", function(d) { return d.classDim; })
+          .attr("id", function(d) { return d.cssID; })
           .classed({area: 1, 'd3-enter': 1})
           .on('mouseover', function (d){
             container.classed('focus', 1);
             d3.select(this).classed('focused', 1);
+            var clas = d.classDim ? d.classDim : d[0].classDim;
+            var id = d.classDim ? d.cssID : d[0].cssID;
+            d3.selectAll($("."+clas+"#"+id)).classed("highlight",true);
+            d3.selectAll($("."+clas+"[id!="+id+"]")).classed("dim",true);
+            d3.selectAll($("circle"+"[id!="+id+"]")).classed("dim",true);
           })
-          .on('mouseout', function(){
+          .on('mouseout', function(d){
             container.classed('focus', 0);
             d3.select(this).classed('focused', 0);
+            var clas = d.classDim ? d.classDim : d[0].classDim;
+            var id = d.classDim ? d.cssID : d[0].cssID;
+            d3.selectAll($("."+clas+"#"+id)).classed("highlight",false);
+            d3.selectAll($("."+clas+"[id!="+id+"]")).classed("dim",false);
+            d3.selectAll($("circle"+"[id!="+id+"]")).classed("dim",false);
           });
 
         polygon.exit()
@@ -251,14 +271,16 @@ var RadarChart = {
                 .text(d[0].value)
                 .classed('visible', 1);
 
-              container.classed('focus', 1);
-              container.select('.area.radar-chart-serie'+d[1]).classed('focused', 1);
+              /* Removed functionality due to conflict with highlighting */
+              // container.classed('focus', 1);
+              // container.select('.area.radar-chart-serie'+d[1]).classed('focused', 1);
             })
             .on('mouseout', function(d){
               tooltip.classed('visible', 0);
 
-              container.classed('focus', 0);
-              container.select('.area.radar-chart-serie'+d[1]).classed('focused', 0);
+              /* Removed functionality due to conflict with highlighting */
+              // container.classed('focus', 0);
+              // container.select('.area.radar-chart-serie'+d[1]).classed('focused', 0);
             });
 
           circle.exit()

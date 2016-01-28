@@ -2,7 +2,8 @@ var viz = function($element,layout,_this) {
 
 	var id = senseUtils.setupContainer($element,layout,"d3vl_slope"),
 		ext_width = $element.width(),
-		ext_height = $element.height();
+		ext_height = $element.height(),
+		classDim = layout.qHyperCube.qDimensionInfo[0].qFallbackTitle.replace(/\s+/g, '-');
 
 	var data = layout.qHyperCube.qDataPages[0].qMatrix;
 
@@ -84,8 +85,17 @@ var viz = function($element,layout,_this) {
 		.data(data)
 		.enter()
 		.append("path")
-		.attr("class","slope")
-		.attr("d",function(d) {return line(d.path);});
+		.attr("class","slope "+classDim)
+     	.attr("id", function(d) { return d.dim(1).qText; })
+		.attr("d",function(d) {return line(d.path);})
+		.on("mouseover", function(d){
+			d3.selectAll($("."+classDim+"#"+d.dim(1).qText)).classed("highlight",true);
+	      	d3.selectAll($("."+classDim+"[id!="+d.dim(1).qText+"]")).classed("dim",true);
+		})
+		.on("mouseout", function(d){
+			d3.selectAll($("."+classDim+"#"+d.dim(1).qText)).classed("highlight",false);
+	      	d3.selectAll($("."+classDim+"[id!="+d.dim(1).qText+"]")).classed("dim",false);
+		});
 
 	plot.selectAll(".label-left")
 		.data(data)

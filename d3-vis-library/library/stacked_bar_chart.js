@@ -1,7 +1,9 @@
 var viz = function($element, layout, _this) {
 	var id = senseUtils.setupContainer($element,layout,"d3vl_stacked_bar"),
 		ext_width = $element.width(),
-		ext_height = $element.height();
+		ext_height = $element.height(),
+		classDim0 = layout.qHyperCube.qDimensionInfo[0].qFallbackTitle.replace(/\s+/g, '-'),
+		classDim1 = layout.qHyperCube.qDimensionInfo[1].qFallbackTitle.replace(/\s+/g, '-');
 
 	var data = layout.qHyperCube.qDataPages[0].qMatrix;
 
@@ -99,18 +101,29 @@ var viz = function($element, layout, _this) {
 	var dim1 = plot.selectAll(".dim1")
 		.data(nested_data)
 		.enter().append("g")
-		.attr("class", "g")
+		.attr("class", "g "+classDim0)
+	    .attr("id", function(d) { return d.key; })
 		.attr("transform", function(d) { return "translate(" + x(d.key) + ",0)"; });
 
 	dim1.selectAll("rect")
 		.data(function(d) { return d.values; })
 		.enter().append("rect")
+		.attr("class", classDim1)
+	    .attr("id", function(d) { return d.dim(2).qText; })
 		.attr("width", x.rangeBand())
 		.attr("y", function(d) { return y(d.measure(1).y1); })
 		.attr("height", function(d) { return y(d.measure(1).y0) - y(d.measure(1).y1); })
 		.style("fill", function(d) { return color(d.dim(2).qText); })
 		.on("click",function(d) {
 			d.dim(2).qSelect();
+		})
+		.on("mouseover", function(d){
+			d3.selectAll($("."+classDim1+"#"+d.dim(2).qText)).classed("highlight",true);
+	      	d3.selectAll($("."+classDim1+"[id!="+d.dim(2).qText+"]")).classed("dim",true);
+		})
+		.on("mouseout", function(d){
+			d3.selectAll($("."+classDim1+"#"+d.dim(2).qText)).classed("highlight",false);
+	      	d3.selectAll($("."+classDim1+"[id!="+d.dim(2).qText+"]")).classed("dim",false);
 		});
 
 	var legend = plot.selectAll(".legend")

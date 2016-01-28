@@ -36,16 +36,38 @@ var viz = function($element, layout, _this) {
     });
 
 
-    var g = svg.selectAll("g").data(partition.nodes(myJSON)).enter().append("g");
+    var g = svg.selectAll("g")
+        .data(partition.nodes(myJSON))
+        .enter().append("g");
 
-    var path = g.append("path").attr("d", arc).style("fill", function (d) {
-        if (d.depth === 0) {
-            var theColor = "white";
-        } else {
-            var theColor = color((d.children ? d : d.parent).name);
-        }
-        return theColor;
-    }).on("click", click);
+    var path = g.append("path")
+        .attr("d", arc)
+        .style("fill", function (d) {
+            if (d.depth === 0) {
+                var theColor = "white";
+            } else {
+                var theColor = color((d.children ? d : d.parent).name);
+            }
+            return theColor;
+        })
+        .each(function(d){
+            d.classDim = d.depth > 0 ? layout.qHyperCube.qDimensionInfo[d.depth-1].qFallbackTitle.replace(/\s+/g, '-') : "-";
+            d.cssID = d.name.replace(/\s+/g, '-');
+        })
+        .attr("class", function(d) { return d.children ? "parent "+d.classDim : "child "+d.classDim; })
+        .attr("id", function(d) { return d.cssID; })
+        .on("click", click)
+        .on("mouseover", function(d){
+            d3.selectAll($("."+d.classDim+"#"+d.cssID)).classed("highlight",true);
+            d3.selectAll($("."+d.classDim+"[id!="+d.cssID+"]")).classed("dim",true);
+            d3.selectAll($("circle"+"[id!="+d.cssID+"]")).classed("dim",true);
+        })
+        .on("mouseout", function(d){
+            d3.selectAll($("."+d.classDim+"#"+d.cssID)).classed("highlight",false);
+            d3.selectAll($("."+d.classDim+"[id!="+d.cssID+"]")).classed("dim",false);
+            d3.selectAll($("circle"+"[id!="+d.cssID+"]")).classed("dim",false);
+        });
+
     var text;
     if (width > 300) {
         text = g.append("text").attr("transform", function (d) {
